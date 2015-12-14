@@ -1,0 +1,8 @@
+<div class="recipe-step form-group item">
+    <%= f.hidden_field :id %>
+    <%= f.label :row_order %>
+    <%= f.text_field :row_order, class: 'row_order' %>
+    <%= f.label :text %>
+    <%= f.text_area :text %>
+    <%= link_to_remove_field "削除", f %>
+</div>

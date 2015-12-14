@@ -1,0 +1,22 @@
+<%= form_for @recipe do |f| %>
+  <div class="recipe">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+    
+    <div class="recipe-ingredients sortable items">
+      <%= f.fields_for :recipe_ingredients do |rif| %>
+        <%= render 'recipe_ingredient_form', f: rif %>
+      <% end %>
+      <%= link_to_add_field "追加", f, :recipe_ingredients %>
+    </div>
+    <div class="recipe-steps sortable items">
+      <%= f.fields_for :recipe_steps do |rsf| %>
+        <%= render 'recipe_step_form', f: rsf %>
+      <% end %>
+      <%= link_to_add_field "追加", f, :recipe_steps %>
+    </div>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
