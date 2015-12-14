@@ -9,10 +9,13 @@
 #  row_order  :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  image      :string
 #
 
 class RecipeStep < ActiveRecord::Base
   belongs_to :recipe
+  
+  mount_uploader :image, ImageUploader
 
   validates :text, presence: true, length: {mimimum: 1, maximum: 50}
 end

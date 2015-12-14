@@ -24,14 +24,24 @@ class RecipesController < ApplicationController
     end
   end
   
+  def update
+    if @recipe.update(recipe_params)
+      flash[:notice] = "updated"
+      redirect_to root_path
+    else
+      flash[:alert] = "save error"
+      render :edit
+    end
+  end
+  
   private 
   def set_recipe
     @recipe = Recipe.find(params[:id])
   end
   def recipe_params
-    params.require(:recipe).permit(:title, :author_name, :ref_url, 
+    params.require(:recipe).permit(:id, :title, :author_name, :ref_url, 
       :main_photo_url, :description, :servings_for,
-      recipe_ingredients_attributes: [:name, :quantity_for, :order, :row_order, :_destroy],
-      recipe_steps_attributes: [:text, :photo_url, :position, :row_order, :_destroy])
+      recipe_ingredients_attributes: [:id, :name, :quantity_for, :order, :row_order, :_destroy],
+      recipe_steps_attributes: [:id, :text, :photo_url, :position, :row_order, :image, :remove_image, :image_cache, :_destroy])
   end
 end

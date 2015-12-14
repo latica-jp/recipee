@@ -27,6 +27,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bootstrap-sass'
 gem 'jquery-ui-rails'
 gem 'jquery-turbolinks'
+gem 'jasny-bootstrap-rails', '~> 3.1', '>= 3.1.3'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -41,6 +42,7 @@ gem 'jquery-turbolinks'
 gem 'sorcery'
 gem 'nokogiri'
 gem 'annotate' # schema 情報を model にコメントとして挿入してくれる
+gem 'carrierwave'
 
 
 group :development, :test do

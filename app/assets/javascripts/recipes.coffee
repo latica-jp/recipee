@@ -2,27 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).on 'ready page:load', ->
-  $('form').on 'click', '.add_field', (event) ->
-    time = new Date().getTime()
-    regexp = new RegExp($(this).data('id'), 'g')
-    $(this).before($(this).data('fields').replace(regexp, time))
-    items = $(this).closest('div')
-    switch_delete_links(items)
-    number_list(items)
-    event.preventDefault() # デフォルトの処理（この場合はクリックに対して）をキャンセルする処理
-    
-  $('form').on 'click', '.remove_field', (event) ->
-    $(this).prev('input[name*=_destroy]').val('true')
-    $(this).closest('div').hide()
-    switch_delete_links($(this).closest('.items'))
-    number_list($(this).closest('.items'))
-    event.preventDefault() # デフォルトの処理（この場合はクリックに対して）をキャンセルする処理
-    
-  $('.sortable').sortable
-    axis: 'y'
-    items: '.item'
-    update: (e, ui) ->
-      number_list($(this))
+
   
   number_list = (list) ->
     items = list.children('div:visible')
@@ -39,3 +19,32 @@ $(document).on 'ready page:load', ->
         item.children('.remove_field').hide()
       else
         item.children('.remove_field').show()
+
+  $('div.items').each ->
+    item = $(this)
+    switch_delete_links(item)
+    
+  $('form').on 'click', '.add_field', (event) ->
+    time = new Date().getTime()
+    regexp = new RegExp($(this).data('id'), 'g')
+    $(this).before($(this).data('fields').replace(regexp, time))
+    items = $(this).closest('div')
+    
+    switch_delete_links(items)
+    number_list(items)
+    event.preventDefault() # デフォルトの処理（この場合はクリックに対して）をキャンセルする処理
+    
+  $('form').on 'click', '.remove_field', (event) ->
+    $(this).prev('input[name*=_destroy]').val('true')
+    $(this).closest('div').hide()
+  
+    switch_delete_links($(this).closest('.items'))
+    number_list($(this).closest('.items'))
+  
+    event.preventDefault() # デフォルトの処理（この場合はクリックに対して）をキャンセルする処理
+    
+  $('.sortable').sortable
+    axis: 'y'
+    items: '.item'
+    update: (e, ui) ->
+      number_list($(this))
