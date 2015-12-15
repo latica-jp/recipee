@@ -19,17 +19,19 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new(recipe_params)
     if @recipe.save
         flash[:notice] = "Saved"
-        redirect_to @recipe
+        render :edit
     else
         flash[:alert] = "Couldn't Save"
         render :new
     end
   end
   
+  def edit
+  end
+  
   def clip
     url = params[:clip_url]
-binding.pry
-    clipper = Clipper.new(url)
+    clipper = RakutenClipper.new(url)
     @recipe = Recipe.new(clipper.recipe_params)
     if @recipe.save
         flash[:notice] = "Saved"

@@ -14,5 +14,5 @@
 class RecipeIngredient < ActiveRecord::Base
   belongs_to :recipe
 
-  validates :name, presence: true, length: {mimimum: 1, maximum: 50}
+  validates :name, presence: true, length: {mimimum: 1, maximum: 100}
 end
