@@ -1,0 +1,5 @@
+<%= form_tag("/clip") do %>
+  <%= label_tag(:clip_url, "Recipe URL:") %>
+  <%= text_field_tag(:clip_url) %>
+  <%= submit_tag("Search") %>
+<% end %>
