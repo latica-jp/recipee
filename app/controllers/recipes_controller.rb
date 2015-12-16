@@ -2,8 +2,6 @@ class RecipesController < ApplicationController
   before_action :set_recipe, only: [:edit, :update, :destroy, :show]
   skip_before_action :require_login, only: [:index, :show]
 
-  include RecipesHelper
-
   def index
     # ranked-model を使用してソート…するにはどうしたらいいのか
     @recipes = Recipe.all 
@@ -31,14 +29,20 @@ class RecipesController < ApplicationController
   
   def clip
     url = params[:clip_url]
-    clipper = RakutenClipper.new(url)
-    @recipe = Recipe.new(clipper.recipe_params)
-    if @recipe.save
-        flash[:notice] = "Saved"
-        redirect_to @recipe
+    # view_context ヘルパーメソッドの呼び出しに使える
+    clipper = view_context.create_clipper(url)
+    if clipper.present?
+      @recipe = Recipe.new(clipper.recipe_params)
+      if @recipe.save
+          flash[:notice] = "レシピを保存しました。"
+          render :edit
+      else
+          flash[:alert] = "レシピが保存できませんでした。"
+          render :new
+      end
     else
-        flash[:alert] = "Couldn't Save"
-        render :new
+      flash[:notice] = "レシピデータが取得できませんでした。URLを確認してください。"
+      redirect_to new_recipe_path
     end
   end
   
