@@ -3,14 +3,13 @@ class RecipesController < ApplicationController
   skip_before_action :require_login, only: [:index, :show]
 
   def index
-    # ranked-model を使用してソート…するにはどうしたらいいのか
     @recipes = Recipe.all 
   end
   
   def new
     @recipe = Recipe.new
-    @recipe.recipe_ingredients.build.row_order = 1 # new ではなく build を使う
-    @recipe.recipe_steps.build.row_order = 1 # new ではなく build を使う
+    @recipe.recipe_ingredients.build.row_order = 1 # new ではなく build
+    @recipe.recipe_steps.build.row_order = 1 # new ではなく build
   end
     
   def create
@@ -34,7 +33,7 @@ class RecipesController < ApplicationController
     if clipper.present?
       @recipe = Recipe.new(clipper.recipe_params)
       if @recipe.save
-          flash[:notice] = "レシピを保存しました。"
+          flash[:notice] = "レシピを取得して保存しました。"
           render :edit
       else
           flash[:alert] = "レシピが保存できませんでした。"
@@ -56,16 +55,19 @@ class RecipesController < ApplicationController
     end
   end
   
-  private 
+  private
+  
   def set_recipe
     @recipe = Recipe.find(params[:id])
   end
+
   def recipe_params
     params.require(:recipe).permit(:id, :title, :author_name, :ref_url, 
       :main_photo_url, :description, :servings_for,
       :clip_url,
-      recipe_ingredients_attributes: [:id, :name, :quantity_for, :order, :row_order, :_destroy],
-      recipe_steps_attributes: [:id, :text, :photo_url, :position, :row_order, :image, :remove_image, :image_cache, :_destroy])
+      recipe_ingredients_attributes: [:id, :name, :quantity_for, 
+        :order, :row_order, :_destroy],
+      recipe_steps_attributes: [:id, :text, :photo_url, :position, :row_order,
+        :image, :remove_image, :image_cache, :_destroy])
   end
-
 end

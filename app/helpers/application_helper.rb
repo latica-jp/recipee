@@ -9,6 +9,6 @@ module ApplicationHelper
   end
   
   def link_to_remove_field(name, f)
-    f.hidden_field(:_destroy) + link_to(name, "#", class:"remove_field")
+    f.hidden_field(:_destroy) + link_to(name, "#", class: "btn btn-default remove_field")
   end
 end

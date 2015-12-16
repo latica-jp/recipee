@@ -1,11 +1,26 @@
-<div class="recipe-step form-group item">
-    <%= f.hidden_field :id %>
-    <%= f.label :row_order %>
-    <%= f.text_field :row_order, class: 'row_order' %>
-    <%= f.label :text %>
-    <%= f.text_area :text %>
-    <%= f.file_field :image %>
-    <%= f.check_box :remove_image %>
+<div class="recipe-step item">
+    <div class="row">
+        <div class="form-group">
+            <%= f.hidden_field :id %>
+            <div class="col-md-1 control-label">
+                <span class="badge row_order"><%= f.object.row_order %></span>
+                <%= f.hidden_field :row_order, class:"row_order" %>
+            </div>
+            <div class="col-md-10">
+                <%= f.text_area :text, class: 'form-control'  %>
+            </div>
+            <div class="col-md-1">
+                <%= link_to_remove_field "削除", f %>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5 col-md-offset-1">
+            <%= f.file_field :image %>
+        </div>
+        <div class="col-md-1">
+            <%= f.check_box :remove_image %>
+        </div>
+    </div>
     <%= image_tag f.object.image_url if f.object.image? %>
-    <%= link_to_remove_field "削除", f %>
 </div>

@@ -5,20 +5,21 @@ $(document).on 'ready page:load', ->
 
   
   number_list = (list) ->
-    items = list.children('div:visible')
+    items = list.find('div.item:visible')
     i = 1
     items.each ->
       item = $(this)
-      item.children('.row_order').val(i++)
+      item.find('span.row_order').html(i)
+      item.find('input:hidden.row_order').val(i++)
 
   switch_delete_links = (list) ->
-    items = list.children('div:visible')
+    items = list.find('div.item:visible')
     items.each ->
       item = $(this)      
       if items.length == 1 
-        item.children('.remove_field').hide()
+        item.find('.remove_field').hide()
       else
-        item.children('.remove_field').show()
+        item.find('.remove_field').show()
 
   $('div.items').each ->
     item = $(this)
@@ -28,7 +29,7 @@ $(document).on 'ready page:load', ->
     time = new Date().getTime()
     regexp = new RegExp($(this).data('id'), 'g')
     $(this).before($(this).data('fields').replace(regexp, time))
-    items = $(this).closest('div')
+    items = $(this).closest('div.items')
     
     switch_delete_links(items)
     number_list(items)
@@ -36,7 +37,7 @@ $(document).on 'ready page:load', ->
     
   $('form').on 'click', '.remove_field', (event) ->
     $(this).prev('input[name*=_destroy]').val('true')
-    $(this).closest('div').hide()
+    $(this).closest('div.item').hide()
   
     switch_delete_links($(this).closest('.items'))
     number_list($(this).closest('.items'))
