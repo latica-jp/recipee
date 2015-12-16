@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-md-4">
+  </div>
+  <div class="col-md-8">
+    <div class="row">
+    <h1><%= @recipe.title %></h1>
+    <div class="col-md-5">
+      <%= image_tag @recipe.image_url %>
+    </div>
+    <div class="col-md-7">
+      <h3>材料<span class="servings_for">（<%= @recipe.servings_for %>）</span></h3>
+      <table class="table">
+      <% @recipe.recipe_ingredients.each do |ingredient| %>
+        <tr>
+          <td><%= ingredient.name %></td>
+          <td><%= ingredient.quantity_for %></td>
+        </tr>
+      <% end %>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <h3>つくりかた</h3>
+    <% @recipe.recipe_steps.each do |step| %>
+      <div class="col-md-4">
+        <div class="thumbnail">
+          <%= image_tag step.image_url(:show_thumb) %>
+          <div class="caption">
+          <h4><%= step.row_order %></h4>
+            <p><%= step.text %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

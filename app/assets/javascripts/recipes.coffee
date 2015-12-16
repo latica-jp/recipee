@@ -3,7 +3,8 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).on 'ready page:load', ->
 
-  
+  $('.thumbnail').matchHeight();
+
   number_list = (list) ->
     items = list.find('div.item:visible')
     i = 1
@@ -49,3 +50,4 @@ $(document).on 'ready page:load', ->
     items: '.item'
     update: (e, ui) ->
       number_list($(this))
+  

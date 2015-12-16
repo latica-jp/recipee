@@ -29,14 +29,14 @@
           <%= f.fields_for :recipe_ingredients do |rif| %>
             <%= render 'recipe_ingredient_form', f: rif %>
           <% end %>
-          <%= link_to_add_field "追加", f, :recipe_ingredients %>
+          <%= link_to_add_field "材料を追加", f, :recipe_ingredients %>
         </div>
         <h3>つくりかた</h3>
         <div class="recipe-steps sortable items">
           <%= f.fields_for :recipe_steps do |rsf| %>
             <%= render 'recipe_step_form', f: rsf %>
           <% end %>
-          <%= link_to_add_field "追加", f, :recipe_steps %>
+          <%= link_to_add_field "ステップを追加", f, :recipe_steps %>
         </div>
         <%= f.check_box :remove_image %>
         <%= image_tag f.object.image_url if f.object.image? %>    

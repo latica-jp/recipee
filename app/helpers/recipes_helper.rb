@@ -73,9 +73,10 @@ module RecipesHelper
     def get_recipe
       title = get_content("h1.recipe-title")
       description = get_content(".summary .description_text")
-      servings_for = get_content(".servings_for")
+      /（(.*?)）/ =~ get_content(".servings_for")
+      servings_for = $1
       author_name = get_content("#recipe_author_name")
-      main_photo_url = get_attr("#main-photo img", "src")
+      main_photo_url = get_attr("#main-photo img", "data-large-photo")
       {title: title, description: description, author_name: author_name, 
         ref_url: @url, servings_for: servings_for, remote_image_url: main_photo_url}
     end
@@ -99,7 +100,7 @@ module RecipesHelper
       get_elements("div.step, div.step_last").each do |e|
         row_order = e.attr("data-position")
         text = get_content("p.step_text", e)
-        photo_url = get_attr("div.image img", "src", e)
+        photo_url = get_attr("div.image img", "data-large-photo", e)
         # remote_image_url: carrierwave 経由で画像をダウンロード
         arr_params.push({text: text, remote_image_url: photo_url, row_order: row_order})
       end
