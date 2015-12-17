@@ -1,27 +1,45 @@
 <div class="row">
-  <div class="col-md-2">
+  <div class="col-md-3">
   
   </div>
-  <div class="col-md-8 col-sd-12">
+  <div class="col-md-9 col-sd-12">
     <%= form_for @recipe, html: {class: "form-horizontal"} do |f| %>
       <h3>基本情報</h3>
       <div class="recipe">
         <div class="form-group">
-          <%= f.label :title, {class: "col-md-2 col-sd-12 control-label"} %>
+          <%= f.label :title, {class: "col-md-2 control-label"} %>
           <div class="col-md-10">
             <%= f.text_field :title, {class: "form-control"} %>
           </div>
         </div>
         <div class="form-group">
-          <%= f.label :description, {class: "col-md-2 col-sd-12 control-label"} %>
+          <%= f.label :description, {class: "col-md-2 control-label"} %>
           <div class="col-md-10">
             <%= f.text_area :description, {class: "form-control"} %>
           </div>
         </div>
         <div class="form-group">
-          <%= f.label :servings_for, {class: "col-md-2 col-sd-12 control-label"} %>
+          <%= f.label :servings_for, {class: "col-md-2 control-label"} %>
           <div class="col-md-10">
             <%= f.text_field :servings_for, {class: "form-control"} %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label "画像", {class: "col-md-2 control-label"} %>
+          <div class="col-md-10">
+            <% if @recipe.image? %>
+              <%= image_tag @recipe.image_url %>
+              <div>
+                <%= f.check_box :remove_image %>
+                <%= f.label :remove_image, "画像を削除" %>
+                <%# レシピの取得に（部分的に）失敗した場合、新規レコードで画像が存在している場合がある %>
+                <%= f.hidden_field :image_cache %>
+              </div>
+            <% else %>
+              <%= f.file_field :image, class: "filestyle", 
+                data: {buttonText: "", size: "sm", icon: "true", 
+                buttonBefore: "true", placeholder: "画像ファイルを選択"}  %>
+            <% end %>
           </div>
         </div>
         <h3>材料</h3>
@@ -38,12 +56,10 @@
           <% end %>
           <%= link_to_add_field "ステップを追加", f, :recipe_steps %>
         </div>
-        <%= f.check_box :remove_image %>
-        <%= image_tag f.object.image_url if f.object.image? %>    
   
       </div>
       <div class="actions">
-        <%= f.submit %>
+        <%= f.submit class:"btn btn-default" %>
       </div>
     <% end %>
   </div>

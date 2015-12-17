@@ -1,14 +1,21 @@
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-3">
+    <div class="btn-group-vertical" role="group">
+      <a href="<%= edit_recipe_path %>" class="btn btn-default" role="button">Edit</a>
+    </div>
   </div>
-  <div class="col-md-8">
+  <div class="col-md-9">
     <div class="row">
-    <h1><%= @recipe.title %></h1>
+    <div class="col-md-12">
+      <h1><%= @recipe.title %></h1>
+    </div>
     <div class="col-md-5">
-      <%= image_tag @recipe.image_url %>
+      <div class="main-photo">
+        <%= image_tag @recipe.image_url %>
+      </div>
     </div>
     <div class="col-md-7">
-      <h3>材料<span class="servings_for">（<%= @recipe.servings_for %>）</span></h3>
+      <h3>材料<span class="servings_for"><%= "（#{@recipe.servings_for}）" unless @recipe.servings_for.blank? %></span></h3>
       <table class="table">
       <% @recipe.recipe_ingredients.each do |ingredient| %>
         <tr>
@@ -20,11 +27,11 @@
     </div>
   </div>
   <div class="row">
-    <h3>つくりかた</h3>
+    <div class="col-md-12"><h3>つくりかた</h3></div>
     <% @recipe.recipe_steps.each do |step| %>
       <div class="col-md-4">
         <div class="thumbnail">
-          <%= image_tag step.image_url(:show_thumb) %>
+          <%= image_tag(step.image_url(:show_thumb)) if step.image.present? %>
           <div class="caption">
           <h4><%= step.row_order %></h4>
             <p><%= step.text %></p>

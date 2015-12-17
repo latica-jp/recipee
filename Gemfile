@@ -38,17 +38,17 @@ gem 'jasny-bootstrap-rails', '~> 3.1', '>= 3.1.3'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-# 2015.12.10
-gem 'sorcery'
-gem 'nokogiri'
-gem 'annotate' # schema 情報を model にコメントとして挿入してくれる
-gem 'carrierwave'
-gem 'mini_magick', '3.8.0'
+gem 'sorcery' # for authentication
+gem 'nokogiri' # for HTML parsing
+gem 'carrierwave' # for image uploading
+gem 'mini_magick', '3.8.0' # for image resizing
+gem 'addressable' # for URL parsing https://github.com/sporkmonger/addressable
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'pry-byebug'
+  gem 'annotate' # schema 情報を model にコメントとして挿入してくれる
 end
 
 group :development do

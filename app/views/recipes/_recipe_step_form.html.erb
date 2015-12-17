@@ -1,26 +1,31 @@
 <div class="recipe-step item">
-    <div class="row">
-        <div class="form-group">
+    <div class="form-group">
+        <div class="row">
             <%= f.hidden_field :id %>
             <div class="col-md-1 control-label">
                 <span class="badge row_order"><%= f.object.row_order %></span>
                 <%= f.hidden_field :row_order, class:"row_order" %>
             </div>
-            <div class="col-md-10">
-                <%= f.text_area :text, class: 'form-control'  %>
+            <div class="col-md-5">
+                <%= f.text_area :text, class: 'form-control', rows: 10  %>
+            </div>
+            <div class="col-md-5">
+                <%= f.file_field :image, class: "filestyle", 
+                  data: {buttonText: "", size: "sm", icon: "true", 
+                  buttonBefore: "true", placeholder: "画像ファイルを選択"} unless f.object.image?  %>
+                <%= image_tag f.object.image_url if f.object.image? %>
+                <% if f.object.image? %>
+                    <div>
+                        <%= f.check_box :remove_image %>
+                        <%= f.label :remove_image, "画像を削除" %>
+                        <%# レシピの取得に（部分的に）失敗した場合、新規レコードで画像が存在している場合がある %>
+                        <%= f.hidden_field :image_cache  %>
+                    </div>
+                <% end %>
             </div>
             <div class="col-md-1">
                 <%= link_to_remove_field "削除", f %>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-5 col-md-offset-1">
-            <%= f.file_field :image %>
-        </div>
-        <div class="col-md-1">
-            <%= f.check_box :remove_image %>
-        </div>
-    </div>
-    <%= image_tag f.object.image_url if f.object.image? %>
 </div>

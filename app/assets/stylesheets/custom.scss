@@ -1,6 +1,45 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+@media (min-width: 1200px) {
+  .container {
+    max-width: 970px;
+  }
+}
 .servings_for {
   font-size: 13px;
+}
+.container img {
+  max-width: 100%;
+}
+
+.main-photo {
+  margin-top: 20px;
+}
+
+input.ingredient-name {
+  width: 100px;
+}
+input.ingredient-quantity-for {
+  width: 80px;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
 }

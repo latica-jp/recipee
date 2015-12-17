@@ -162,7 +162,6 @@ module RecipesHelper
       get_elements("li[itemprop=ingredient]").each do |e|
           name = get_content("span[itemprop=name]", e)
           quantity_for = get_content("span[itemprop=amount]", e)
-          # remote_image_url: carrierwave 経由で画像をダウンロード
           arr_params.push({name: name, quantity_for: quantity_for, row_order: arr_params.length + 1})
       end
       arr_params
@@ -176,6 +175,7 @@ module RecipesHelper
         # 説明文がdiv.direction の子要素になっていない
         text = sanitize_ex(e.next_element.inner_html)
         photo_url = nil # 画像なし
+        # remote_image_url: carrierwave 経由で画像をダウンロード
         arr_params.push({text: text, remote_image_url: photo_url, row_order: row_order})
       end
       arr_params
@@ -183,19 +183,22 @@ module RecipesHelper
   end
   
   require 'net/http'
+  require 'addressable/uri'
   
   def create_clipper(url)
 
+    uri = Addressable::URI.parse(url)
     # check if URL Valid
-    uri = URI.parse(url)
     return nil if uri.host.nil?
+    # remove params
+    uri.query_values = nil
     # check is recipe URL
-    recipe_url = uri.host + uri.request_uri
-    if (recipe_url =~ /^cookpad\.com\/recipe\/\d.*/).present?
+    recipe_url = "#{uri.scheme}://#{uri.host}#{uri.request_uri}"
+    if (recipe_url =~ /^http:\/\/cookpad\.com\/recipe\/\d.*/).present?
       type = :cookpad
-    elsif (recipe_url =~ /^www\.orangepage\.net\/recipes\/detail_\d.*/).present?
+    elsif (recipe_url =~ /^http:\/\/www\.orangepage\.net\/recipes\/detail_\d.*/).present?
       type = :orangepage
-    elsif (recipe_url =~ /^recipe\.rakuten\.co\.jp\/recipe\/\d.*/).present?
+    elsif (recipe_url =~ /^http:\/\/recipe\.rakuten\.co\.jp\/recipe\/\d.*/).present?
       type = :rakuten
     else
       return nil
@@ -207,11 +210,11 @@ module RecipesHelper
     end
     
     if type == :cookpad
-      return CookpadClipper.new(url)
+      return CookpadClipper.new(recipe_url)
     elsif type == :orangepage
-      return OrangepageClipper.new(url)
+      return OrangepageClipper.new(recipe_url)
     elsif type == :rakuten
-      return RakutenClipper.new(url)
+      return RakutenClipper.new(recipe_url)
     end
     
     return nil

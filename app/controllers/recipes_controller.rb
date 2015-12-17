@@ -15,10 +15,10 @@ class RecipesController < ApplicationController
   def create
     @recipe = Recipe.new(recipe_params)
     if @recipe.save
-        flash[:notice] = "Saved"
+        flash[:notice] = "レシピを保存しました。"
         render :edit
     else
-        flash[:alert] = "Couldn't Save"
+        flash[:alert] = "レシピの保存に失敗しました。"
         render :new
     end
   end
@@ -34,23 +34,23 @@ class RecipesController < ApplicationController
       @recipe = Recipe.new(clipper.recipe_params)
       if @recipe.save
           flash[:notice] = "レシピを取得して保存しました。"
-          render :edit
+          redirect_to @recipe
       else
-          flash[:alert] = "レシピが保存できませんでした。"
-          render :new
+          flash[:alert] = "レシピを取得しましたが、保存に失敗しました。"
+          render :edit
       end
     else
-      flash[:notice] = "レシピデータが取得できませんでした。URLを確認してください。"
+      flash[:alert] = "レシピデータが取得できませんでした。URLを確認してください。"
       redirect_to new_recipe_path
     end
   end
   
   def update
     if @recipe.update(recipe_params)
-      flash[:notice] = "updated"
-      redirect_to root_path
+      flash[:notice] = "レシピを更新しました。"
+      redirect_to @recipe
     else
-      flash[:alert] = "save error"
+      flash[:alert] = "レシピの更新に失敗しました。"
       render :edit
     end
   end
@@ -63,8 +63,8 @@ class RecipesController < ApplicationController
 
   def recipe_params
     params.require(:recipe).permit(:id, :title, :author_name, :ref_url, 
-      :main_photo_url, :description, :servings_for,
-      :clip_url,
+      :main_photo_url, :description, :servings_for, 
+      :image, :image_cache, :remove_image, :clip_url, 
       recipe_ingredients_attributes: [:id, :name, :quantity_for, 
         :order, :row_order, :_destroy],
       recipe_steps_attributes: [:id, :text, :photo_url, :position, :row_order,
