@@ -17,6 +17,5 @@ class RecipeStep < ActiveRecord::Base
   
   mount_uploader :image, ImageUploader
 
-  validates :text, presence: true, if: "image.nil?"
-  validates :text, length: {mimimum: 1, maximum: 256}
+  validates :text, length: {minimum: 1, maximum: 256}, presence: true
 end

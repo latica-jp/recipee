@@ -1,7 +1,9 @@
 <div class="row">
   <div class="col-md-3">
-    <div class="btn-group-vertical" role="group">
-      <a href="<%= edit_recipe_path %>" class="btn btn-default" role="button">Edit</a>
+    <div class="left-sidebar">
+      <div class="btn-group-vertical btn-block" role="group">
+        <a href="<%= edit_recipe_path %>" class="btn btn-warning btn-lg" role="button">レシピを編集する</a>
+      </div>
     </div>
   </div>
   <div class="col-md-9">
@@ -15,7 +17,7 @@
       </div>
     </div>
     <div class="col-md-7">
-      <h3>材料<span class="servings_for"><%= "（#{@recipe.servings_for}）" unless @recipe.servings_for.blank? %></span></h3>
+      <h2>材料<span class="servings_for"><%= "（#{@recipe.servings_for}）" unless @recipe.servings_for.blank? %></span></h2>
       <table class="table">
       <% @recipe.recipe_ingredients.each do |ingredient| %>
         <tr>
@@ -27,7 +29,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-12"><h3>つくりかた</h3></div>
+    <div class="col-md-12"><h2>つくりかた</h2></div>
     <% @recipe.recipe_steps.each do |step| %>
       <div class="col-md-4">
         <div class="thumbnail">
@@ -39,5 +41,16 @@
         </div>
       </div>
     <% end %>
+    <% if @recipe.ref_url.present? %>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="alert alert-info">
+            <p>このレシピのオリジナルはこちらです。</p>
+            <p><%= link_to @recipe.ref_url, @recipe.ref_url %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    </div>
   </div>
 </div>

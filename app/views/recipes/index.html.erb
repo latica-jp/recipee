@@ -2,12 +2,10 @@
   <% @recipes.each do |recipe| %>
     <div class="col-md-4 col-sd-6">
       <div class="thumbnail">
-        <%= link_to(image_tag(recipe.image_url(:thumb)), recipe) if recipe.image.present? %>
+        <% img = recipe.image.present? ? image_tag(recipe.image_url(:thumb)) : holder_tag('280x210', '画像なし', 'gray') %>
+        <%= link_to(img, recipe) %>
         <div class="caption">
           <h4><%= link_to recipe.title, recipe %></h4>
-          <%= link_to 'Show', recipe %> | 
-          <%= link_to 'Edit', edit_recipe_path(recipe) %> | 
-          <%= link_to 'Destroy', recipe, method: :delete, data: { confirm: 'Are you sure?' } %>
         </div>
       </div>
     </div>

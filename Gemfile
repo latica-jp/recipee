@@ -24,10 +24,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Recipe Note
-gem 'bootstrap-sass'
 gem 'jquery-ui-rails'
 gem 'jquery-turbolinks'
-gem 'jasny-bootstrap-rails', '~> 3.1', '>= 3.1.3'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -43,6 +41,7 @@ gem 'nokogiri' # for HTML parsing
 gem 'carrierwave' # for image uploading
 gem 'mini_magick', '3.8.0' # for image resizing
 gem 'addressable' # for URL parsing https://github.com/sporkmonger/addressable
+gem 'holder_rails' # for generating placeholder image
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

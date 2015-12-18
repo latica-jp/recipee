@@ -1,6 +1,14 @@
-<%= form_tag("/clip") do %>
-  <%= label_tag :clip_url, "Recipe URL:" %>
-  <%= text_field_tag :clip_url %>
-  <%= submit_tag "Search", data: {toggle: "modal", target: "#modal", backdrop: "static"} %>
+<%= form_tag "/clip", class: "form-horizontal" do %>
+  <h3>レシピサービスからレシピを取得</h3>
+  <p>現在、Cookpad、楽天レシピ、オレンジページ.netに対応しています。</p>
+  <div class="form-group">
+    <%= label_tag :clip_url, "URL", class: "control-label col-md-2" %>
+    <div class="col-md-8">
+      <%= text_field_tag :clip_url, nil, class: "form-control" %>
+    </div>
+    <div class="col-md-2">
+      <%= submit_tag "取得する", class: "btn btn-success", data: {toggle: "modal", target: "#modal", backdrop: "static"} %>
+    </div>
+  </div>
 <% end %>
 <%= render 'modal_dialog' %>

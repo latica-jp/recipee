@@ -16,7 +16,7 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new(recipe_params)
     if @recipe.save
         flash[:notice] = "レシピを保存しました。"
-        render :edit
+        redirect_to @recipe
     else
         flash[:alert] = "レシピの保存に失敗しました。"
         render :new
@@ -26,21 +26,31 @@ class RecipesController < ApplicationController
   def edit
   end
   
+  def destroy
+    if @recipe.destroy
+      flash[:notice] = "レシピを削除しました。"
+      redirect_to root_path
+    else
+      flash[:alert] = "レシピの削除に失敗しました。"
+      # えっと？
+    end
+  end
+  
   def clip
     url = params[:clip_url]
-    # view_context ヘルパーメソッドの呼び出しに使える
+    # view_context経由でヘルパーメソッドの呼び出し
     clipper = view_context.create_clipper(url)
     if clipper.present?
       @recipe = Recipe.new(clipper.recipe_params)
       if @recipe.save
-          flash[:notice] = "レシピを取得して保存しました。"
+          flash[:notice] = "外部レシピを取得して保存しました。"
           redirect_to @recipe
       else
-          flash[:alert] = "レシピを取得しましたが、保存に失敗しました。"
+          flash[:alert] = "外部レシピを取得しましたが、保存に失敗しました。"
           render :edit
       end
     else
-      flash[:alert] = "レシピデータが取得できませんでした。URLを確認してください。"
+      flash[:alert] = "外部レシピデータが取得できませんでした。URLを確認してください。"
       redirect_to new_recipe_path
     end
   end
