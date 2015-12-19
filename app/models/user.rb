@@ -11,7 +11,7 @@
 #
 
 class User < ActiveRecord::Base
-    has_many :recipes, dependent: destroy
+    has_many :recipes, dependent: :destroy
     
     # 公式ドキュメント通りに記述。
     # if: -> は　:if => lambda{..} と等価
