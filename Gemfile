@@ -43,6 +43,7 @@ gem 'carrierwave' # for image uploading
 gem 'mini_magick', '3.8.0' # for image resizing
 gem 'addressable' # for URL parsing https://github.com/sporkmonger/addressable
 gem 'holder_rails' # for generating placeholder image
+gem 'cloudinary' # for image hosting on production
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
