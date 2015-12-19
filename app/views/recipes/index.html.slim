@@ -1,7 +1,7 @@
 .row
     - if @recipes.any?
-      .col-md-4.col-sd-6
         - @recipes.each do |recipe|
+          .col-md-4.col-sd-6
             .thumbnail
               - if recipe.image.present?
                 - img = image_tag recipe.image_url(:thumb)
