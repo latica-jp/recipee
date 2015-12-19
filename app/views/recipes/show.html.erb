@@ -13,7 +13,11 @@
     </div>
     <div class="col-md-5">
       <div class="main-photo">
-        <%= image_tag @recipe.image_url %>
+        <% if @recipe.image.present? %>
+          <%= image_tag @recipe.image_url %>
+        <% else %>
+          <%= holder_tag('280x210', '画像なし', 'gray') %>
+        <% end %>
       </div>
     </div>
     <div class="col-md-7">

@@ -26,6 +26,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Recipe Note
 gem 'jquery-ui-rails'
 gem 'jquery-turbolinks'
+gem 'slim-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -58,3 +59,8 @@ group :development do
   gem 'spring'
 end
 
+group :production do
+  gem 'puma'
+  gem 'rails_12factor'
+  gem 'pg'
+end

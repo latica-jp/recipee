@@ -11,6 +11,8 @@
 #
 
 class User < ActiveRecord::Base
+    has_many :recipes
+    
     # 公式ドキュメント通りに記述。
     # if: -> は　:if => lambda{..} と等価
     authenticates_with_sorcery!

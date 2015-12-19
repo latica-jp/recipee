@@ -1,13 +1,13 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:edit, :update, :destroy, :show]
-  skip_before_action :require_login, only: [:index, :show]
+  skip_before_action :require_login, only: [:show]
 
   def index
-    @recipes = Recipe.all 
+    @recipes = current_user.recipes
   end
   
   def new
-    @recipe = Recipe.new
+    @recipe = current_user.recipes.new
     @recipe.recipe_ingredients.build.row_order = 1 # new ではなく build
     @recipe.recipe_steps.build.row_order = 1 # new ではなく build
   end
@@ -41,7 +41,7 @@ class RecipesController < ApplicationController
     # view_context経由でヘルパーメソッドの呼び出し
     clipper = view_context.create_clipper(url)
     if clipper.present?
-      @recipe = Recipe.new(clipper.recipe_params)
+      @recipe = current_user.recipes.new(clipper.recipe_params)
       if @recipe.save
           flash[:notice] = "外部レシピを取得して保存しました。"
           redirect_to @recipe
@@ -72,7 +72,7 @@ class RecipesController < ApplicationController
   end
 
   def recipe_params
-    params.require(:recipe).permit(:id, :title, :author_name, :ref_url, 
+    params.require(:recipe).permit(:id, :user_id, :title, :author_name, :ref_url, 
       :main_photo_url, :description, :servings_for, 
       :image, :image_cache, :remove_image, :clip_url, 
       recipe_ingredients_attributes: [:id, :name, :quantity_for, 
