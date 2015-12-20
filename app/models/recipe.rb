@@ -17,10 +17,10 @@
 class Recipe < ActiveRecord::Base
     belongs_to :users
     
-    has_many :recipe_ingredients, dependent: :destroy
+    has_many :recipe_ingredients, -> { order(:row_order) }, dependent: :destroy
     accepts_nested_attributes_for :recipe_ingredients, allow_destroy: true
     
-    has_many :recipe_steps, dependent: :destroy
+    has_many :recipe_steps, -> { order(:row_order) }, dependent: :destroy
     accepts_nested_attributes_for :recipe_steps, allow_destroy: true
    
     mount_uploader :image, ImageUploader
