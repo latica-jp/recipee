@@ -2,9 +2,6 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $ ->
-
-  $('.thumbnail').matchHeight();
-
   number_list = (list) ->
     items = list.find('div.item:visible')
     i = 1
@@ -50,4 +47,7 @@ $ ->
     items: '.item'
     update: (e, ui) ->
       number_list($(this))
-  
+
+  $('.thumbnail').matchHeight();
+
+
