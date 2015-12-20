@@ -16,7 +16,6 @@
 //= require jquery-ui/sortable
 //= require jquery-ui/effect-highlight
 //= require_tree .
-//= require turbolinks
 //= require bootstrap.min
 //= require holder
 
