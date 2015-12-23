@@ -1,0 +1,28 @@
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :email, "メールアドレス" %>
+    <%= f.text_field :email, class:"form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :password, "パスワード" %><br>
+    <%= f.password_field :password, class:"form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :password_confirmation, "パスワード（再入力）" %><br>
+    <%= f.password_field :password_confirmation, class:"form-control" %>
+  </div>
+  <div class="actions">
+    <%= f.submit "登録する", class: "btn btn-lg btn-success" %>
+  </div>
+<% end %>
