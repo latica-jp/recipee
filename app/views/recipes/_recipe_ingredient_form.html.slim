@@ -1,0 +1,19 @@
+.recipe-ingredient.item
+  .form-group
+    = f.hidden_field :id
+    
+    .col-md-1.control-label
+      span class="badge row_order"
+        = f.object.row_order
+      = f.hidden_field :row_order, class: "row_order"
+    
+    .col-md-5
+      = f.text_field :name, class: "form-control"
+    
+    = f.label "数量", class: "col-md-2 control-label"
+    
+    .col-md-3
+      = f.text_field :quantity_for, class: "form-control"
+
+    .col-md-1
+      = link_to_remove_field "削除", f

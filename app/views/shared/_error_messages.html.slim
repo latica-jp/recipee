@@ -1,0 +1,7 @@
+- if record.errors.any?
+  #error_explanation
+  .alert.alert-danger
+    | 以下の#{record.errors.count}件のエラーにより保存ができませんでした。
+  ul
+    - record.errors.full_messages.each do |message|
+      li = message

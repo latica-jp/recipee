@@ -14,8 +14,8 @@
 
 class RecipeStep < ActiveRecord::Base
   belongs_to :recipe
-  
+
   mount_uploader :image, ImageUploader
 
-  validates :text, length: {minimum: 1, maximum: 256}, presence: true
+  validates :text, length: {maximum: 256}, presence: true
 end

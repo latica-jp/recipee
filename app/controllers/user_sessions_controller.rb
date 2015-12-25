@@ -1,5 +1,6 @@
 class UserSessionsController < ApplicationController
   before_action :require_login, only: [:destroy]
+
   def new
     @user = User.new
   end
@@ -8,8 +9,8 @@ class UserSessionsController < ApplicationController
     if @user = login(params[:email], params[:password])
       redirect_back_or_to controller: :recipes, action: :index, notice: 'ログインしました。'
     else
-      flash.now[:alert] = 'Login failed'
-      render action: 'new'
+      flash.now[:alert] = 'ログインに失敗しました。'
+      render 'new'
     end
   end
 

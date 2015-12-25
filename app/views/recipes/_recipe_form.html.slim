@@ -1,0 +1,55 @@
+= render 'shared/error_messages', record: @recipe
+
+= form_for @recipe, html: {class: "form-horizontal"} do |f|
+  = f.hidden_field :id
+
+  h2 レシピ情報
+  .recipe
+    .form-group
+      = f.label :title, "タイトル", class: "col-md-2 control-label"
+      .col-md-10
+        = f.text_field :title, class: "form-control"
+
+    .form-group
+      = f.label :description, "概要", class: "col-md-2 control-label"
+      .col-md-10
+        = f.text_area :description, class: "form-control", rows: 5
+
+    .form-group
+      = f.label :servings_for, "分量", class: "col-md-2 control-label"
+      .col-md-10
+        = f.text_field :servings_for, class: "form-control"
+
+    .form-group
+      = f.label :image, "画像", class: "col-md-2 control-label"
+      .col-md-10
+        - if @recipe.image
+          = image_tag @recipe.image_url
+          .image_related
+            = f.check_box :remove_image
+            = f.label :remove_image, "画像を削除", class: "control-label"
+            / レシピの取得に成功したがデータに不足がある場合、
+            / 新規レコードでも画像が存在している場合がある
+            = f.hidden_field :image_cache
+        - else
+          = f.file_field :image, class: "filestyle", \
+            data: {buttonText: "", size: "sm", icon: "true", \
+            buttonBefore: "true", placeholder: "画像ファイルを選択"}
+            
+  .recipe-ingredients.sortable.items
+    h2 材料
+    = f.fields_for :recipe_ingredients do |rif|
+      = render "recipe_ingredient_form", f: rif
+    = link_to_add_field "材料を追加", f, :recipe_ingredients
+
+  .recipe-steps.sortable.items
+    h2 つくりかた
+    = f.fields_for :recipe_steps do |rsf|
+      = render "recipe_step_form", f: rsf
+    = link_to_add_field "ステップを追加", f, :recipe_steps
+      
+  .row.mar-top-20
+    .col-md-6
+      = f.submit (f.object.new_record? ? "作成する" : "更新する"), class: "btn btn-lg btn-warning btn-block"
+    .col-md-6
+      = link_to "キャンセルする", @recipe, class:"btn btn-lg btn-default btn-block", role: "button"

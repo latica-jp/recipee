@@ -1,0 +1,27 @@
+.recipe-step.item
+  .form-group
+    = f.hidden_field :id
+    
+    .col-md-1.control-label
+      span class="badge row_order"
+        = f.object.row_order
+      = f.hidden_field :row_order, class: "row_order"
+    
+    .col-md-5
+      = f.text_area :text, class: "form-control", rows: 10
+    
+    .col-md-5
+      - if f.object.image?
+        = image_tag f.object.image_url
+        .image_related
+          = f.check_box :remove_image
+          = f.label :remove_image, "画像を削除", class: "control-label"
+          / レシピの取得に（部分的に）失敗した場合、新規レコードで画像が存在している場合がある
+          = f.hidden_field :image_cache
+      - else
+        = f.file_field :image, class: "filestyle", \
+          data: {buttonText: "", size: "sm", icon: "true", \
+          buttonBefore: "true", placeholder: "画像ファイルを選択"} 
+
+    .col-md-1
+      = link_to_remove_field "削除", f

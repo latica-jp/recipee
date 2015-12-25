@@ -15,15 +15,15 @@
 #
 
 class Recipe < ActiveRecord::Base
-    belongs_to :users
-    
-    has_many :recipe_ingredients, -> { order(:row_order) }, dependent: :destroy
-    accepts_nested_attributes_for :recipe_ingredients, allow_destroy: true
-    
-    has_many :recipe_steps, -> { order(:row_order) }, dependent: :destroy
-    accepts_nested_attributes_for :recipe_steps, allow_destroy: true
-   
-    mount_uploader :image, ImageUploader
+  belongs_to :users
 
-    validates :title, presence: true, length: {minimum: 1, maximum: 50}
+  has_many :recipe_ingredients, -> { order(:row_order) }, dependent: :destroy
+  accepts_nested_attributes_for :recipe_ingredients, allow_destroy: true
+
+  has_many :recipe_steps, -> { order(:row_order) }, dependent: :destroy
+  accepts_nested_attributes_for :recipe_steps, allow_destroy: true
+
+  mount_uploader :image, ImageUploader
+
+  validates :title, presence: true, length: {minimum: 2, maximum: 50}
 end

@@ -1,0 +1,15 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+      recipe: レシピ
+      recipe_step: つくりかた
+      recipe_ingredient: 材料
+    attributes:
+      recipe:
+        id: ID
+        title: タイトル
+      recipe_steps:
+        text: つくりかた
+      recipe_ingredients:
+        name: 材料名
