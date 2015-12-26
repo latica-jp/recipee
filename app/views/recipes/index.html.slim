@@ -6,7 +6,9 @@
             - if recipe.image.present?
               - img = image_tag recipe.image_url(:thumb)
             - else
-              - img = holder_tag '280x210', '画像なし', 'gray'
+              / holder.js は標準ではsrcを使うがrailsではdata-src
+              / FFはsrcが空白だと画像が表示されないので、以下のようにする
+              - img = tag :img, data: {src: "holder.js/280x210?text=画像なし&theme=gray"}
             = link_to img, recipe
             .caption
               h4 = link_to recipe.title, recipe
