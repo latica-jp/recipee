@@ -2,6 +2,6 @@
   .col-md-3
     .left-sidebar
       .btn-group-vertical.btn-block role="group"
-        = link_to "レシピを削除する", recipe_path, class: "btn btn-warning btn-lg", role: "button"
+        = link_to "レシピを削除する", recipe_path, method: :delete, data: { confirm: "レシピを削除しますか？" }, class: "btn btn-warning btn-lg", role: "button"
   .col-md-9
     = render 'recipe_form'

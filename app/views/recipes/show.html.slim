@@ -12,7 +12,7 @@
           - if @recipe.image.present?
             = image_tag @recipe.image_url
           - else
-            = holder_tag '280x210', '画像なし', 'gray'
+            = tag :img, data: {src: "holder.js/280x210?text=画像なし&theme=gray"}
       .col-md-7
         h2
           | 材料

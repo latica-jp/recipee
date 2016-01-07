@@ -23,7 +23,7 @@
     .form-group
       = f.label :image, "画像", class: "col-md-2 control-label"
       .col-md-10
-        - if @recipe.image
+        - if @recipe.image.present?
           = image_tag @recipe.image_url
           .image_related
             = f.check_box :remove_image
