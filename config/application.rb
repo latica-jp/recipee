@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module RecipeNote
+module Recipee
   class Application < Rails::Application
     # Bootstrap派生のCSS（Honoka）を入れたので。
     # see: https://gist.github.com/iamatypeofwalrus/6467148
