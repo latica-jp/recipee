@@ -7,6 +7,12 @@
     .row
       .col-md-12
         h1 = @recipe.title
+        - if @recipe.ref_url.present?
+          .row
+            .col-md-12
+              .alert.alert-info
+                p このレシピのオリジナルはこちらです
+                p = link_to @recipe.ref_url, @recipe.ref_url
       .col-md-5
         .main-photo
           - if @recipe.image.present?
@@ -33,9 +39,3 @@
               .caption
                 h4 = step.row_order
                 p = step.text
-        - if @recipe.ref_url.present?
-          .row
-            .col-md-12
-              .alert.alert-info
-                p このレシピのオリジナルはこちらです
-                p = link_to @recipe.ref_url, @recipe.ref_url
