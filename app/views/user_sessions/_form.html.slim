@@ -9,6 +9,10 @@ h1 ログイン
     = label_tag :password, "パスワード"
     = password_field_tag :password, nil, class: "form-control"
 
+  .form-group
+    = check_box_tag :remember, params[:remember], true
+    = label_tag :remember, "ログインしたままにする"
+
   .actions
     = submit_tag "ログインする", class: "btn btn-lg btn-success"
   

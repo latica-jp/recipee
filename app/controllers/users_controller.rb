@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                           :integer          not null, primary key
+#  email                        :string           not null
+#  crypted_password             :string
+#  salt                         :string
+#  created_at                   :datetime
+#  updated_at                   :datetime
+#  remember_me_token            :string
+#  remember_me_token_expires_at :datetime
+#
+
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   skip_before_action :require_login, only: [:index, :new, :create]
