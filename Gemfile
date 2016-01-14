@@ -42,7 +42,7 @@ gem 'sorcery' # for authentication
 gem 'nokogiri' # for HTML parsing
 gem 'carrierwave' # for image uploading
 gem 'mini_magick', '3.8.0' # for image resizing
-gem 'addressable' # for URL parsing https://github.com/sporkmonger/addressable
+gem 'addressable' # for URL parsing used in recipe parser https://github.com/sporkmonger/addressable
 gem 'holder_rails' # for generating placeholder image
 gem 'cloudinary' # for image hosting on production
 
