@@ -12,9 +12,9 @@
 //
 //= require jquery
 //= require jquery.turbolinks
+//= require bootstrap-sprockets
 //= require jquery_ujs
 //= require jquery-ui/sortable
 //= require jquery-ui/effect-highlight
 //= require_tree .
-//= require bootstrap
 //= require holder
