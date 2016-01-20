@@ -1,41 +1,42 @@
-.row
-  .col-md-3
-    .left-sidebar
-      .btn-group-vertical.btn-block role="group"
-        = link_to "レシピを編集する", edit_recipe_path, class: "btn btn-warning btn-lg", rose: "button"
-  .col-md-9
-    .row
-      .col-md-12
-        h1 = @recipe.title
-        - if @recipe.ref_url.present?
-          .row
-            .col-md-12
-              .alert.alert-info
-                p このレシピのオリジナルはこちらです
-                p = link_to @recipe.ref_url, @recipe.ref_url
-      .col-md-5
-        .main-photo
-          - if @recipe.image.present?
-            = image_tag @recipe.image_url
-          - else
-            = tag :img, data: {src: "holder.js/280x210?text=画像なし&theme=gray"}
-      .col-md-7
-        h2
-          | 材料
-          span class="servings_for"
-            = "（#{@recipe.servings_for}）" if @recipe.servings_for.present?
-        table class="table"
-          - @recipe.recipe_ingredients.each do |ingredient|
-            tr
-              td = ingredient.name
-              td = ingredient.quantity_for
-    .row
-      .col-md-12
-        h2 つくりかた
-        - @recipe.recipe_steps.each do |step|
-          .col-md-4
-            .thumbnail
-              = image_tag step.image_url(:show_thumb) if step.image.present?
-              .caption
-                h4 = step.row_order
-                p = step.text
+.container
+  .row
+    .col-md-3
+      .left-sidebar
+        .btn-group-vertical.btn-block role="group"
+          = link_to "レシピを編集する", edit_recipe_path, class: "btn btn-warning btn-lg", rose: "button"
+    .col-md-9
+      .row
+        .col-md-12
+          h1 = @recipe.title
+          - if @recipe.ref_url.present?
+            .row
+              .col-md-12
+                .alert.alert-info
+                  p このレシピのオリジナルはこちらです
+                  p = link_to @recipe.ref_url, @recipe.ref_url
+        .col-md-5
+          .main-photo
+            - if @recipe.image.present?
+              = image_tag @recipe.image_url
+            - else
+              = tag :img, data: {src: "holder.js/280x210?text=画像なし&theme=gray"}
+        .col-md-7
+          h2
+            | 材料
+            span class="servings_for"
+              = "（#{@recipe.servings_for}）" if @recipe.servings_for.present?
+          table class="table"
+            - @recipe.recipe_ingredients.each do |ingredient|
+              tr
+                td = ingredient.name
+                td = ingredient.quantity_for
+      .row
+        .col-md-12
+          h2 つくりかた
+          - @recipe.recipe_steps.each do |step|
+            .col-md-4
+              .thumbnail
+                = image_tag step.image_url(:show_thumb) if step.image.present?
+                .caption
+                  h4 = step.row_order
+                  p = step.text

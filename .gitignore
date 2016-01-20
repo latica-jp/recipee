@@ -107,3 +107,7 @@ bower.json
 # gem Carrierwave
 # see https://github.com/jnicklas/carrierwave-example-app/blob/master/.gitignore
 public/uploads
+
+# 必要な人もいるのでテンプレートには入っていない
+# see: https://github.com/rails/rails/pull/2817
+/public/assets

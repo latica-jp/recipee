@@ -1,11 +1,28 @@
+@import "bootstrap-sprockets";
+@import "honoka";
+
 @media (min-width: 1200px) {
   .container {
     max-width: 970px;
   }
 }
+
+body {
+  padding-top: $navbar-height;
+}
+
+
+.cover {
+  background-image: url("header-image.jpg");
+  min-height: 640px;
+}
+
 .servings_for {
   font-size: 13px;
 }
+
+
+
 .container img {
   max-width: 100%;
 }
@@ -46,10 +63,13 @@ input.ingredient-quantity-for {
 .actions {
   margin-top: 20px;
 }
-.navbar-brand {
-  padding: 20px 15px !important
-}
 
 .mar-top-20 {
   margin-top: 20px;
+}
+
+.navbar-brand {
+  $brand-height: 32px;
+  padding-top: ($navbar-height - $brand-height) / 2;
+  padding-bottom: ($navbar-height - $brand-height) / 2;
 }
