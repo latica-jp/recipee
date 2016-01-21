@@ -2,9 +2,9 @@
     <div class="container">
         <nav>
            <div class="navbar-header">
-              <a class="navbar-brand" href="#">
+              <%= link_to root_path, class: "navbar-brand" do %>
                 <%= image_tag "main-logo.png" %>
-              </a>
+              <% end %>
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <li><%= link_to "ホーム", root_path %></li>
