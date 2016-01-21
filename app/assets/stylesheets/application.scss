@@ -1,5 +1,10 @@
 $navbar-height: 60px;
+$icon-font-path: "bootstrap/";
 
 @import "bootstrap-sprockets";
 @import "honoka";
-@import "custom"
+@import "custom";
+
+.field_with_errors {
+  @extend .has-error;
+}
