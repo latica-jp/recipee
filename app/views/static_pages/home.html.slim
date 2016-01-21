@@ -1,1 +1,12 @@
 .cover
+  .intro-text
+    |あのサイトのレシピ、
+    br
+    |おうち専用にアレンジしたい。
+  .intro-sub-text
+    |Recipee で、できます。
+  .pad-top-70
+    = link_to new_user_path do
+      = button_tag "", type: "button", class: "btn btn-success btn-lg" do
+        <span class="glyphicon glyphicon-user"></span> 
+          | ユーザ登録する
