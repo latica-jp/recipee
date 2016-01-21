@@ -45,6 +45,7 @@ gem 'mini_magick', '3.8.0' # for image resizing
 gem 'addressable' # for URL parsing used in recipe parser https://github.com/sporkmonger/addressable
 gem 'holder_rails' # for generating placeholder image
 gem 'cloudinary' # for image hosting on production
+gem 'acts-as-taggable-on', '~> 3.4' # Tagging
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

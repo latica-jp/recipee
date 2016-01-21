@@ -22,13 +22,13 @@ class RecipesController < ApplicationController
   def index
     @recipes = current_user.recipes
   end
-  
+
   def new
     @recipe = current_user.recipes.new
     @recipe.recipe_ingredients.build.row_order = 1 # new ではなく build
     @recipe.recipe_steps.build.row_order = 1 # new ではなく build
   end
-    
+
   def create
     @recipe = current_user.recipes.new(recipe_params)
     if @recipe.save
@@ -39,10 +39,10 @@ class RecipesController < ApplicationController
         render :new
     end
   end
-  
+
   def edit
   end
-  
+
   def destroy
     if @recipe.destroy
       flash[:notice] = "レシピを削除しました。"
@@ -52,7 +52,7 @@ class RecipesController < ApplicationController
       # えっと？
     end
   end
-  
+
   def clip
     url = params[:clip_url]
     # view_context経由でヘルパーメソッドの呼び出し
@@ -71,7 +71,7 @@ class RecipesController < ApplicationController
       redirect_to new_recipe_path
     end
   end
-  
+
   def update
     if @recipe.update(recipe_params)
       flash[:notice] = "レシピを更新しました。"
@@ -81,18 +81,18 @@ class RecipesController < ApplicationController
       render :edit
     end
   end
-  
+
   private
-  
+
   def set_recipe
     @recipe = Recipe.find(params[:id])
   end
 
   def recipe_params
-    params.require(:recipe).permit(:id, :user_id, :title, :author_name, :ref_url, 
-      :main_photo_url, :description, :servings_for, 
-      :image, :image_cache, :remove_image, :clip_url, 
-      recipe_ingredients_attributes: [:id, :name, :quantity_for, 
+    params.require(:recipe).permit(:id, :user_id, :title, :author_name, :ref_url,
+      :main_photo_url, :description, :servings_for,
+      :image, :image_cache, :remove_image, :clip_url, :tag_list,
+      recipe_ingredients_attributes: [:id, :name, :quantity_for,
         :order, :row_order, :_destroy],
       recipe_steps_attributes: [:id, :text, :photo_url, :position, :row_order,
         :image, :remove_image, :image_cache, :_destroy])
