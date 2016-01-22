@@ -71,7 +71,8 @@ $ ->
 
     event.preventDefault() # デフォルトの処理（この場合はクリックに対して）をキャンセルする処理
 
-  # thumbnail 要素の高さを一括して揃える
+  # jquery-matchHeight-min.js thumbnail 要素の高さを一括して揃える
+  # https://github.com/liabru/jquery-match-height
   $('.thumbnail').matchHeight()
 
   # 削除リンクとSortableの初期処理
@@ -79,5 +80,6 @@ $ ->
     item = $(this)
     switch_delete_links_and_sortable(item)
 
-  # bootstrap-select
+  # bootstrap-select.min.js
+  # https://github.com/silviomoreto/bootstrap-select
   $('.selectpicker').selectpicker();
