@@ -10,6 +10,7 @@
 #  updated_at                   :datetime
 #  remember_me_token            :string
 #  remember_me_token_expires_at :datetime
+#  name                         :string
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

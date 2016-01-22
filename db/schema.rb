@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160121020117) do
+ActiveRecord::Schema.define(version: 20160122042316) do
 
   create_table "recipe_ingredients", force: :cascade do |t|
     t.integer  "recipe_id"
@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(version: 20160121020117) do
     t.datetime "updated_at"
     t.string   "remember_me_token"
     t.datetime "remember_me_token_expires_at"
+    t.string   "name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

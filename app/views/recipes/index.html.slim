@@ -4,6 +4,7 @@
       h1 レシピ
       - if @tags.present?
         .tags
+          | ラベルで検索　
           = link_to "すべてのレシピ", recipes_path, class: "tag label label-info"
           - @tags.each do |tag|
             = tag_with_link_to tag
@@ -23,6 +24,7 @@
                 - if recipe.tag_list.present?
                   .tags
                     - recipe.tag_list.each do |tag|
-                      = tag_with_link_to tag
+                      span class="tag label label-success"
+                        = tag
     - else
       .alert.alert-info まだレシピがありません。
