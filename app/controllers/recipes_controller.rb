@@ -13,6 +13,7 @@
 #  updated_at     :datetime         not null
 #  image          :string
 #  user_id        :integer
+#  is_public      :boolean          default(FALSE), not null
 #
 
 class RecipesController < ApplicationController
@@ -103,7 +104,7 @@ class RecipesController < ApplicationController
   def recipe_params
     params.require(:recipe).permit(:id, :user_id, :title, :author_name, :ref_url,
       :main_photo_url, :description, :servings_for,
-      :image, :image_cache, :remove_image, :clip_url, :tag_list,
+      :image, :image_cache, :remove_image, :clip_url, :tag_list, :is_public,
       recipe_ingredients_attributes: [:id, :name, :quantity_for,
         :order, :row_order, :_destroy],
       recipe_steps_attributes: [:id, :text, :photo_url, :position, :row_order,

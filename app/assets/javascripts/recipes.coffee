@@ -78,3 +78,6 @@ $ ->
   $('div.items').each ->
     item = $(this)
     switch_delete_links_and_sortable(item)
+
+  # bootstrap-select
+  $('.selectpicker').selectpicker();

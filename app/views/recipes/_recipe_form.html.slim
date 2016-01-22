@@ -39,6 +39,10 @@
       = f.label :tag_list, "整理ラベル", class: "col-md-2 control-label"
       .col-md-10
         = text_field_tag "recipe[tag_list]", @recipe.tag_list.join(","), data: { role: "tagsinput" }, class: "form-control"
+    .form-group
+      = f.label :is_public, "閲覧", class: "col-md-2 control-label"
+      .col-md-10
+        = f.select :is_public, { "メンバーに公開": true, "自分専用": false }, {}, class: "selectpicker"
             
   .recipe-ingredients.sortable.items
     h2 材料

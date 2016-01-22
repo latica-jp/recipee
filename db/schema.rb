@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160122042316) do
+ActiveRecord::Schema.define(version: 20160122055035) do
 
   create_table "recipe_ingredients", force: :cascade do |t|
     t.integer  "recipe_id"
@@ -43,10 +43,11 @@ ActiveRecord::Schema.define(version: 20160122042316) do
     t.string   "main_photo_url"
     t.string   "description"
     t.string   "servings_for"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.string   "image"
     t.integer  "user_id"
+    t.boolean  "is_public",      default: false, null: false
   end
 
   create_table "taggings", force: :cascade do |t|

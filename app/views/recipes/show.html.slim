@@ -31,10 +31,14 @@
                 td = ingredient.name
                 td = ingredient.quantity_for
           - if @recipe.tag_list.any?
-            h3 整理ラベル
+            h4 整理ラベル
             - @recipe.tag_list.each do |tag|
               span class="tag label label-success"
                 = tag
+            h4 閲覧
+            - label_type = @recipe.is_public ? "primary" : "info"
+            = content_tag :span, class: "label label-#{label_type}" do
+              = @recipe.is_public ? "メンバーに公開" : "自分専用"
       .row
         .col-md-12
           h2 つくりかた

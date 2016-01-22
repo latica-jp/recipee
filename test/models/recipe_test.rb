@@ -13,6 +13,7 @@
 #  updated_at     :datetime         not null
 #  image          :string
 #  user_id        :integer
+#  is_public      :boolean          default(FALSE), not null
 #
 
 require 'test_helper'
