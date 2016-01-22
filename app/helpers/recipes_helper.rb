@@ -14,28 +14,36 @@
 #  image          :string
 #  user_id        :integer
 #
-
 module RecipesHelper
+
+  def tag_with_link_to(tag)
+    link_to tag_recipes_path(tag) do
+      content_tag :span, class: "tag label label-success" do
+        tag
+      end
+    end
+  end
+
   require 'open-uri'
   require 'nokogiri'
 
   # 抽象クラス
   class Clipper
-    
+
     def initialize(url)
       @url = url
     end
-        
+
     def recipe_params
       param = get_recipe
       param[:recipe_ingredients_attributes] = get_ingredients
       param[:recipe_steps_attributes] = get_steps
       param
     end
-    
+
     def get_recipe
     end
-    
+
     def get_ingredients
     end
 
@@ -43,29 +51,29 @@ module RecipesHelper
     end
 
     protected
-    
+
     def get_content(tag_css, element = nil)
       clip if !element && !@doc
       element = element ||= @doc
       element = element.css(tag_css).first
       element.present? ? sanitize_ex(element.inner_html) : nil
     end
-    
+
     def get_attr(tag_css, attr_name, element = nil)
       clip if !element && !@doc
       element = element ||= @doc
       element.css(tag_css).first.try(:attr, attr_name)
     end
-    
+
     def get_elements(tag_css)
       clip if !@doc
       @doc.css(tag_css)
     end
-    
+
     def sanitize_ex(line)
       ActionController::Base.helpers.sanitize(line.gsub(/\n/,""), tags: ['br']).gsub(/<br.*?>/,"\n").gsub(/^\s*|\s*$/, "")
     end
-    
+
     def clip
       charset = nil
       begin
@@ -84,7 +92,7 @@ module RecipesHelper
       end
     end
   end
-  
+
   # Cookpadさん
   class CookpadClipper < Clipper
     def get_recipe
@@ -94,10 +102,10 @@ module RecipesHelper
       servings_for = $1
       author_name = get_content("#recipe_author_name")
       main_photo_url = get_attr("#main-photo img", "data-large-photo")
-      {title: title, description: description, author_name: author_name, 
+      {title: title, description: description, author_name: author_name,
         ref_url: @url, servings_for: servings_for, remote_image_url: main_photo_url}
     end
-    
+
     def get_ingredients
       arr_params = Array.new
       get_elements("div.ingredient_row").each do |e|
@@ -122,9 +130,9 @@ module RecipesHelper
         arr_params.push({text: text, remote_image_url: photo_url, row_order: row_order})
       end
       arr_params
-    end    
+    end
   end
-  
+
   # 楽天レシピさん
   class RakutenClipper < Clipper
     def get_recipe
@@ -133,10 +141,10 @@ module RecipesHelper
       servings_for = get_content("div.materialBox span[itemprop=recipeYield]")
       author_name = get_content("div.ownerThumb span[itemprop=name]")
       main_photo_url = get_attr("div.rcpPhotoBox img", "src")
-      {title: title, description: description, author_name: author_name, 
+      {title: title, description: description, author_name: author_name,
         ref_url: @url, servings_for: servings_for, remote_image_url: main_photo_url}
     end
-    
+
     def get_ingredients
       arr_params = Array.new
       get_elements("li[itemprop=ingredients]").each do |e|
@@ -158,9 +166,9 @@ module RecipesHelper
         arr_params.push({text: text, remote_image_url: photo_url, row_order: row_order})
       end
       arr_params
-    end    
+    end
   end
-  
+
   # オレンジページさん
   class OrangepageClipper < Clipper
     def get_recipe
@@ -170,10 +178,10 @@ module RecipesHelper
       servings_for = $1
       author_name = get_content("span[itemprop=author]")
       main_photo_url = get_attr("img[itemprop=photo]", "src")
-      {title: title, description: description, author_name: author_name, 
+      {title: title, description: description, author_name: author_name,
         ref_url: @url, servings_for: servings_for, remote_image_url: main_photo_url}
     end
-    
+
     def get_ingredients
       arr_params = Array.new
       get_elements("li[itemprop=ingredient]").each do |e|
@@ -196,12 +204,12 @@ module RecipesHelper
         arr_params.push({text: text, remote_image_url: photo_url, row_order: row_order})
       end
       arr_params
-    end    
+    end
   end
-  
+
   require 'net/http'
   require 'addressable/uri'
-  
+
   def create_clipper(url)
 
     uri = Addressable::URI.parse(url)
@@ -220,12 +228,12 @@ module RecipesHelper
     else
       return nil
     end
-    
+
     # check if page really exists
     Net::HTTP.start(uri.host, uri.port) do |http|
       return nil if http.head(uri.request_uri).code != "200"
     end
-    
+
     if type == :cookpad
       return CookpadClipper.new(recipe_url)
     elsif type == :orangepage
@@ -233,8 +241,8 @@ module RecipesHelper
     elsif type == :rakuten
       return RakutenClipper.new(recipe_url)
     end
-    
+
     return nil
-    
+
   end
 end

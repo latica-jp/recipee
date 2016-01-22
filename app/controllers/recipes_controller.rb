@@ -21,6 +21,13 @@ class RecipesController < ApplicationController
 
   def index
     @recipes = current_user.recipes
+    set_all_tags
+  end
+
+  def tag
+    @recipes = current_user.recipes.tagged_with(params[:tag])
+    set_all_tags
+    render :index
   end
 
   def new
@@ -86,6 +93,11 @@ class RecipesController < ApplicationController
 
   def set_recipe
     @recipe = Recipe.find(params[:id])
+  end
+
+  def set_all_tags
+    @tags = Set.new
+    current_user.recipes.each { |recipe| @tags.merge(recipe.tag_list) }
   end
 
   def recipe_params

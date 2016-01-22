@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require bootstrap-sprockets
+//= require bootstrap-tagsinput.min
 //= require jquery_ujs
 //= require jquery-ui/sortable
 //= require jquery-ui/effect-highlight

@@ -35,6 +35,10 @@
           = f.file_field :image, class: "filestyle", \
             data: {buttonText: "", size: "sm", icon: "true", \
             buttonBefore: "true", placeholder: "画像ファイルを選択"}
+    .form-group
+      = f.label :tag_list, "整理ラベル", class: "col-md-2 control-label"
+      .col-md-10
+        = text_field_tag "recipe[tag_list]", @recipe.tag_list.join(","), data: { role: "tagsinput" }, class: "form-control"
             
   .recipe-ingredients.sortable.items
     h2 材料

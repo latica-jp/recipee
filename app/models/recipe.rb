@@ -16,7 +16,7 @@
 #
 
 class Recipe < ActiveRecord::Base
-  acts_as_taggable
+  acts_as_taggable_on :tags
   belongs_to :users
 
   has_many :recipe_ingredients, -> { order(:row_order) }, dependent: :destroy

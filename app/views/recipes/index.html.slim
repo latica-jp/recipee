@@ -1,7 +1,12 @@
 .container
   .row
     .page-header.col-md-12
-      .h1 レシピ
+      h1 レシピ
+      - if @tags.present?
+        .tags
+          = link_to "すべてのレシピ", recipes_path, class: "tag label label-info"
+          - @tags.each do |tag|
+            = tag_with_link_to tag
     - if @recipes.any?
         - @recipes.each do |recipe|
           .col-md-4.col-sd-6
@@ -15,5 +20,9 @@
               = link_to img, recipe
               .caption
                 h4 = link_to recipe.title, recipe
+                - if recipe.tag_list.present?
+                  .tags
+                    - recipe.tag_list.each do |tag|
+                      = tag_with_link_to tag
     - else
       .alert.alert-info まだレシピがありません。

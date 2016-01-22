@@ -73,8 +73,7 @@ input.ingredient-quantity-for {
 .left-sidebar {
   margin-top: 20px;
 }
-.actions
- {
+.actions{
   margin-top: 20px;
 }
 
@@ -90,4 +89,17 @@ input.ingredient-quantity-for {
   $brand-height: 32px;
   padding-top: ($navbar-height - $brand-height) / 2;
   padding-bottom: ($navbar-height - $brand-height) / 2;
+}
+
+.tags {
+  a:hover {
+    text-decoration: none;
+  }
+  .label {
+    margin-right: 4px;
+  }
+}
+
+.bootstrap-tagsinput {
+  width: 100%;
 }

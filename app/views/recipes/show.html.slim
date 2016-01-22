@@ -30,6 +30,11 @@
               tr
                 td = ingredient.name
                 td = ingredient.quantity_for
+          - if @recipe.tag_list.any?
+            h3 整理ラベル
+            - @recipe.tag_list.each do |tag|
+              span class="tag label label-success"
+                = tag
       .row
         .col-md-12
           h2 つくりかた
