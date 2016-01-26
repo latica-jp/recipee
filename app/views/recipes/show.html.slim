@@ -3,7 +3,7 @@
     .col-md-3
       .left-sidebar
         .btn-group-vertical.btn-block role="group"
-          - if @recipe.user_id == current_user.id
+          - if @recipe.user_id == current_user.try(:id)
             = link_to "レシピを編集する", edit_recipe_path, class: "btn btn-warning btn-lg"
     .col-md-9
       .row

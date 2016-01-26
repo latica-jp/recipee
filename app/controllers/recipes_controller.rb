@@ -21,14 +21,14 @@ class RecipesController < ApplicationController
   before_action :set_is_public, only: [:index, :show]
   before_action :is_self_owned, only: [:edit, :update, :destroy]
   before_action :is_self_owned_or_public, only: [:show]
-  skip_before_action :require_login, only: [:show]
+  skip_before_action :require_login, only: [:show, :index]
 
   def index
     @q = Recipe.ransack(params[:q])
-    if @is_public
-      @recipes = @q.result.where(is_public: true)
+    if @is_public || !current_user
+      @recipes = @q.result(distinct: true).where(is_public: true)
     else
-      @recipes = @q.result.where(user_id: current_user.id)
+      @recipes = @q.result(distinct: true).where(user_id: current_user.id)
     end
     set_all_tags(@recipes)
     @recipes = @recipes.tagged_with(params[:tag]) if params[:tag]
@@ -116,7 +116,7 @@ class RecipesController < ApplicationController
   end
 
   def is_self_owned_or_public
-    redirect_to root_path unless @recipe.user_id == current_user.id || @recipe.is_public
+    redirect_to root_path unless @recipe.is_public || @recipe.user_id == current_user.id
   end
 
   def recipe_params
