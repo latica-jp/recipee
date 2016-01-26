@@ -161,7 +161,7 @@ module RecipesHelper
           name = get_content("a", e)
           quantity_for = get_content("p.amount", e)
           # remote_image_url: carrierwave 経由で画像をダウンロード
-          arr_params.push({name: name, quantity_for: quantity_for, row_order: arr_params.length + 1})
+          arr_params.push({name: name, quantity_for: quantity_for, row_order: arr_params.length + 1}) if name.present?
       end
       arr_params
     end
@@ -197,7 +197,7 @@ module RecipesHelper
       get_elements("li[itemprop=ingredient]").each do |e|
           name = get_content("span[itemprop=name]", e)
           quantity_for = get_content("span[itemprop=amount]", e)
-          arr_params.push({name: name, quantity_for: quantity_for, row_order: arr_params.length + 1})
+          arr_params.push({name: name, quantity_for: quantity_for, row_order: arr_params.length + 1}) if name.present?
       end
       arr_params
     end
