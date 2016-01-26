@@ -103,7 +103,7 @@ class RecipesController < ApplicationController
   end
 
   def set_is_public
-    @is_public = params.try(:[], :recipe).try(:[], :is_public) == true
+    @is_public = (params.try(:[], :recipe).try(:[], :is_public)) == "true"
   end
 
   def set_all_tags(recipes)
