@@ -1,13 +1,19 @@
 .container
   .row
     .page-header.col-md-12
-      h1 マイレシピ
+      h1 
+        = @is_public.present? ? "公開レシピ" : "マイレシピ" 
       - if @tags.present?
-        .tags
-          | ラベルで検索　
-          = link_to "すべてのレシピ", recipes_path, class: "tag label label-info"
-          - @tags.each do |tag|
-            = tag_with_link_to tag
+    .form-horizontal
+      .form-group
+        - if @tags.present?
+          label class="control-label col-md-2"
+            | ラベルで検索
+          .col-md-10.tags
+            = link_to "すべてのレシピ", recipes_path, class: "tag label label-info"
+            - @tags.each do |tag|
+              = tag_with_link_to tag, @is_public
+    = render "search_form"
     - if @recipes.any?
         - @recipes.each do |recipe|
           .col-md-4.col-sd-6
@@ -27,4 +33,4 @@
                       span class="tag label label-success"
                         = tag
     - else
-      .alert.alert-info まだレシピがありません。
+      .alert.alert-info レシピがありません。

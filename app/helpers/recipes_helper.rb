@@ -18,12 +18,20 @@
 
 module RecipesHelper
 
-  def tag_with_link_to(tag)
-    link_to tag_recipes_path(tag) do
+  def tag_with_link_to(tag, is_public)
+    link_to recipes_path(recipe: { is_public: is_public }, tag: tag) do
       content_tag :span, class: "tag label label-success" do
         tag
       end
     end
+  end
+
+  def is_from_action(action_name)
+    controller.action_name == action_name
+  end
+
+  def is_public_view
+    controller.action_name == "public_index"
   end
 
   require 'open-uri'

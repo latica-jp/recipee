@@ -18,17 +18,20 @@
 
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:edit, :update, :destroy, :show]
+  before_action :set_is_public, only: [:index, :show]
+  before_action :is_self_owned, only: [:edit, :update, :destroy]
+  before_action :is_self_owned_or_public, only: [:show]
   skip_before_action :require_login, only: [:show]
 
   def index
-    @recipes = current_user.recipes
-    set_all_tags
-  end
-
-  def tag
-    @recipes = current_user.recipes.tagged_with(params[:tag])
-    set_all_tags
-    render :index
+    @q = Recipe.ransack(params[:q])
+    if @is_public
+      @recipes = @q.result.where(is_public: true)
+    else
+      @recipes = @q.result.where(user_id: current_user.id)
+    end
+    set_all_tags(@recipes)
+    @recipes = @recipes.tagged_with(params[:tag]) if params[:tag]
   end
 
   def new
@@ -49,6 +52,9 @@ class RecipesController < ApplicationController
   end
 
   def edit
+  end
+
+  def show
   end
 
   def destroy
@@ -96,15 +102,28 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
   end
 
-  def set_all_tags
+  def set_is_public
+    @is_public = params.try(:[], :recipe).try(:[], :is_public) == true
+  end
+
+  def set_all_tags(recipes)
     @tags = Set.new
-    current_user.recipes.each { |recipe| @tags.merge(recipe.tag_list) }
+    recipes.each { |recipe| @tags.merge(recipe.tag_list) }
+  end
+
+  def is_self_owned
+    redirect_to root_path unless @recipe.user_id == current_user.id
+  end
+
+  def is_self_owned_or_public
+    redirect_to root_path unless @recipe.user_id == current_user.id || @recipe.is_public
   end
 
   def recipe_params
     params.require(:recipe).permit(:id, :user_id, :title, :author_name, :ref_url,
       :main_photo_url, :description, :servings_for,
-      :image, :image_cache, :remove_image, :clip_url, :tag_list, :is_public,
+      :image, :image_cache, :remove_image, :clip_url, :tag_list,
+      :tag, :is_public,
       recipe_ingredients_attributes: [:id, :name, :quantity_for,
         :order, :row_order, :_destroy],
       recipe_steps_attributes: [:id, :text, :photo_url, :position, :row_order,
