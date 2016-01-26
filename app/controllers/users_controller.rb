@@ -33,14 +33,11 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-
-    respond_to do |format|
-      if @user.save
-        auto_login(@user)
-        redirect_to root_path, notice: 'ユーザを新規作成しました。'
-      else
-        render :new
-      end
+    if @user.save
+      auto_login(@user)
+      redirect_to root_path, notice: 'ユーザを新規作成しました。'
+    else
+      render :new
     end
   end
 

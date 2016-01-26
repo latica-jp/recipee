@@ -7,7 +7,7 @@ class UserSessionsController < ApplicationController
 
   def create
     if @user = login(params[:email], params[:password], params[:remember])
-      redirect_back_or_to "recipes#index"
+      redirect_back_or_to controller: :recipes, action: :index
     else
       flash.now[:alert] = "ログインに失敗しました。"
       render "new"

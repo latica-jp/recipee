@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   delete 'logout', to: 'user_sessions#destroy', as: :logout
   post 'clip', to: "recipes#clip"
 
-  resources :users
+  resources :users, except: [:index, :show]
   resources :user_sessions
   resources :recipes
   #resources :recipes do
