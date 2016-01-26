@@ -11,15 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160122055035) do
+ActiveRecord::Schema.define(version: 20160126224135) do
 
   create_table "recipe_ingredients", force: :cascade do |t|
     t.integer  "recipe_id"
     t.string   "name"
     t.string   "quantity_for"
     t.integer  "row_order"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "name_hiragana"
   end
 
   add_index "recipe_ingredients", ["recipe_id"], name: "index_recipe_ingredients_on_recipe_id"

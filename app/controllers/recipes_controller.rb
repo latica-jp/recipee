@@ -78,7 +78,7 @@ class RecipesController < ApplicationController
           redirect_to @recipe
       else
           flash[:alert] = "外部レシピを取得しましたが、保存に失敗しました。"
-          render :edit
+          render :new
       end
     else
       flash[:alert] = "外部レシピデータが取得できませんでした。URLを確認してください。"

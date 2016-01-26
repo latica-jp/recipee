@@ -47,6 +47,7 @@ gem 'holder_rails' # for generating placeholder image
 gem 'cloudinary' # for image hosting on production
 gem 'acts-as-taggable-on', '~> 3.4' # Tagging
 gem 'ransack' # custom search
+gem 'httparty' # call external api
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
