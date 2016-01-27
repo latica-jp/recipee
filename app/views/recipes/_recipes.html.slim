@@ -4,7 +4,7 @@
         .col-md-4.col-sd-6
           .thumbnail
             / star / unstar
-            - if @is_public.present? && current_user
+            - if @is_public && current_user
               .action
                 - if recipe.voted_on_by? current_user
                   - star_flag = "starred"
