@@ -26,7 +26,8 @@ class RecipesController < ApplicationController
   def index
     @q = Recipe.ransack(params[:q])
     if @is_public || !current_user
-      @recipes = @q.result(distinct: true).where(is_public: true).where.not(user_id: current_user.id)
+      @recipes = @q.result(distinct: true).where(is_public: true)
+      @recipes = @recipes.where.not(user_id: current_user.id) if current_user
     else
       @recipes = @q.result(distinct: true).where(user_id: current_user.id)
     end
