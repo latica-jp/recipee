@@ -18,6 +18,7 @@
 
 class Recipe < ActiveRecord::Base
   acts_as_taggable_on :tags
+  acts_as_votable
   belongs_to :users
 
   has_many :recipe_ingredients, -> { order(:row_order) }, dependent: :destroy

@@ -17,8 +17,8 @@
 #
 
 class RecipesController < ApplicationController
-  before_action :set_recipe, only: [:edit, :update, :destroy, :show]
-  before_action :set_is_public, only: [:index, :show]
+  before_action :set_recipe, only: [:edit, :update, :destroy, :show, :star, :unstar]
+  before_action :set_is_public, only: [:index, :show, :starred_index]
   before_action :is_self_owned, only: [:edit, :update, :destroy]
   before_action :is_self_owned_or_public, only: [:show]
   skip_before_action :require_login, only: [:show, :index]
@@ -26,12 +26,17 @@ class RecipesController < ApplicationController
   def index
     @q = Recipe.ransack(params[:q])
     if @is_public || !current_user
-      @recipes = @q.result(distinct: true).where(is_public: true)
+      @recipes = @q.result(distinct: true).where(is_public: true).where.not(user_id: current_user.id)
     else
       @recipes = @q.result(distinct: true).where(user_id: current_user.id)
     end
     set_all_tags(@recipes)
     @recipes = @recipes.tagged_with(params[:tag]) if params[:tag]
+  end
+
+  def starred_index
+    @recipes = current_user.find_voted_items
+    set_all_tags(@recipes)
   end
 
   def new
@@ -94,6 +99,16 @@ class RecipesController < ApplicationController
       flash[:alert] = "レシピの更新に失敗しました。"
       render :edit
     end
+  end
+
+  def star
+    @recipe.liked_by current_user if current_user
+    redirect_to :back
+  end
+
+  def unstar
+    @recipe.unliked_by current_user if current_user
+    redirect_to :back
   end
 
   private

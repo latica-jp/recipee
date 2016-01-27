@@ -108,3 +108,27 @@ input.ingredient-quantity-for {
 .bootstrap-tagsinput {
   width: 100%;
 }
+
+.thumbnail {
+  position: relative;
+  left: 10px;
+  top: 10px;
+
+  .action {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+  }
+  .glyphicon-star {
+    font-size: 28px;
+
+    &.starred {
+      color: #FFC031;
+    }
+    &.unstarred {
+      color: #DCDCDC;
+    }
+  }
+
+
+}

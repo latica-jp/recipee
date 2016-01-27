@@ -1,0 +1,30 @@
+- if @recipes.any?
+    - @recipes.each do |recipe|
+      .col-md-4.col-sd-6
+        .thumbnail
+          .action
+            - if @is_public.present? && current_user
+              - if recipe.voted_on_by? current_user
+                - star_flag = "starred"
+                - link_url = unstar_recipe_path(recipe)
+              - else
+                - star_flag = "unstarred"
+                - link_url = star_recipe_path(recipe)
+              = link_to link_url, method: :post do
+                span class="glyphicon glyphicon-star #{star_flag}"
+          - if recipe.image.present?
+            - img = image_tag recipe.image_url(:thumb)
+          - else
+            / holder.js は標準ではsrcを使うがrailsではdata-src
+            / FFはsrcが空白だと画像が表示されないので、以下のようにする
+            - img = tag :img, data: {src: "holder.js/280x210?text=画像なし&theme=gray"}
+          = link_to img, recipe
+          .caption
+            h4 = link_to recipe.title, recipe
+            - if recipe.tag_list.present?
+              .tags
+                - recipe.tag_list.each do |tag|
+                  span class="tag label label-success"
+                    = tag
+- else
+  .alert.alert-info レシピがありません。

@@ -14,6 +14,7 @@
 #
 
 class User < ActiveRecord::Base
+    acts_as_voter
     has_many :recipes, -> { order(updated_at: :desc) }, dependent: :destroy
 
     # 公式ドキュメント通りに記述。

@@ -3,34 +3,6 @@
     .page-header.col-md-12
       h1 
         = @is_public.present? ? "公開レシピ" : "マイレシピ" 
-      - if @tags.present?
-    .form-horizontal
-      .form-group
-        - if @tags.present?
-          label class="control-label col-md-2"
-            | ラベルで検索
-          .col-md-10.tags
-            = link_to "すべてのレシピ", recipes_path(recipe: { is_public: @is_public }), class: "tag label label-info"
-            - @tags.each do |tag|
-              = tag_with_link_to tag, @is_public
+    = render "label_form"
     = render "search_form"
-    - if @recipes.any?
-        - @recipes.each do |recipe|
-          .col-md-4.col-sd-6
-            .thumbnail
-              - if recipe.image.present?
-                - img = image_tag recipe.image_url(:thumb)
-              - else
-                / holder.js は標準ではsrcを使うがrailsではdata-src
-                / FFはsrcが空白だと画像が表示されないので、以下のようにする
-                - img = tag :img, data: {src: "holder.js/280x210?text=画像なし&theme=gray"}
-              = link_to img, recipe
-              .caption
-                h4 = link_to recipe.title, recipe
-                - if recipe.tag_list.present?
-                  .tags
-                    - recipe.tag_list.each do |tag|
-                      span class="tag label label-success"
-                        = tag
-    - else
-      .alert.alert-info レシピがありません。
+    = render "recipes"

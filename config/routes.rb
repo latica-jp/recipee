@@ -6,7 +6,16 @@ Rails.application.routes.draw do
 
   resources :users, except: [:index, :show]
   resources :user_sessions
-  resources :recipes
+  resources :recipes do
+    member do
+      post "star", action: :star
+      post "unstar", action: :unstar
+    end
+    collection do
+      get "starred", action: :starred_index
+    end
+  end
+
   #resources :recipes do
   #  collection do
   #    get 'tag/:tag', to: "recipes#tag_index", as: :tag

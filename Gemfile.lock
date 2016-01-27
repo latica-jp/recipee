@@ -38,6 +38,7 @@ GEM
       tzinfo (~> 1.1)
     acts-as-taggable-on (3.5.0)
       activerecord (>= 3.2, < 5)
+    acts_as_votable (0.10.0)
     addressable (2.4.0)
     annotate (2.7.0)
       activerecord (>= 3.2, < 6.0)
@@ -236,6 +237,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts-as-taggable-on (~> 3.4)
+  acts_as_votable
   addressable
   annotate
   byebug
