@@ -1,9 +1,10 @@
-= search_form_for @q, class: "form-horizontal" do |f|
-  .form-group
-    = f.label :word, "検索ワード", class: "col-md-2 control-label"
-    .col-md-10
-      = f.search_field :title_or_recipe_ingredients_name_or_recipe_ingredients_name_hiragana_cont, class: "form-control"
-      = hidden_field_tag "recipe[is_public]", @is_public
-  .form-group
-    .col-md-offset-2.col-md-10
-      = f.submit "検索", class: "btn btn-success"
+.row
+  = search_form_for @q, class: "form-horizontal" do |f|
+    .form-group
+      = f.label :word, "検索ワード", class: "col-md-2 control-label"
+      .col-md-10
+        = f.search_field :title_or_recipe_ingredients_name_or_recipe_ingredients_name_hiragana_cont, class: "form-control"
+        = hidden_field_tag "recipe[is_public]", @is_public
+    .form-group
+      .col-md-offset-2.col-md-10
+        = f.submit "検索", class: "btn btn-success"
