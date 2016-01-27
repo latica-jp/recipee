@@ -3,17 +3,21 @@
       - @recipes.each do |recipe|
         .col-md-4.col-sd-6
           .thumbnail
-            / star / unstar
-            - if @is_public && current_user
-              .action
-                - if recipe.voted_on_by? current_user
-                  - star_flag = "starred"
-                  - link_url = unstar_recipe_path(recipe)
-                - else
-                  - star_flag = "unstarred"
-                  - link_url = star_recipe_path(recipe)
-                = link_to link_url, method: :post do
-                  span class="glyphicon glyphicon-star #{star_flag}"
+            - if @is_public
+                / corner ribbon
+                .ribbon
+                  span みんなのレシピ
+                - if current_user
+                  / star / unstar
+                  .action
+                    - if recipe.voted_on_by? current_user
+                      - star_flag = "starred"
+                      - link_url = unstar_recipe_path(recipe)
+                    - else
+                      - star_flag = "unstarred"
+                      - link_url = star_recipe_path(recipe)
+                    = link_to link_url, method: :post do
+                      span class="glyphicon glyphicon-star #{star_flag}"
             / image
             - if recipe.image.present?
               - img = image_tag recipe.image_url(:thumb)
