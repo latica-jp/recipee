@@ -34,6 +34,10 @@ module RecipesHelper
     controller.action_name == "public_index"
   end
 
+  def recipe_created_by_other_user? recipe
+    recipe.user_id != current_user.try(:id)
+  end
+
   require 'open-uri'
   require 'nokogiri'
 

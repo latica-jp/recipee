@@ -111,6 +111,7 @@ input.ingredient-quantity-for {
 
 .thumbnail {
   position: relative;
+  overflow: hidden;
 
   .action {
     position: absolute;
