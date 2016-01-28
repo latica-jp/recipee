@@ -29,8 +29,9 @@ class RecipesController < ApplicationController
       @recipes = @q.result(distinct: true).where(is_public: true)
       @recipes = @recipes.where.not(user_id: current_user.id) if current_user
     else
-      @recipes = @q.result(distinct: true).where(user_id: current_user.id)
-      @recipes.concat current_user.find_voted_items
+      # 自分のレシピ＋お気に入り登録したレシピ（重複を排除）
+      @recipes = Set.new(@q.result(distinct: true).where(user_id: current_user.id))
+      @recipes.merge current_user.find_voted_items
     end
     set_all_tags(@recipes)
     @recipes = @recipes.tagged_with(params[:tag]) if params[:tag]
