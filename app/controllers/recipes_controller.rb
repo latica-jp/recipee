@@ -106,12 +106,10 @@ class RecipesController < ApplicationController
 
   def star
     @recipe.liked_by current_user if current_user
-    redirect_to :back
   end
 
   def unstar
     @recipe.unliked_by current_user if current_user
-    redirect_to :back
   end
 
   private

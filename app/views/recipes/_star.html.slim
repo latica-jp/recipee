@@ -1,0 +1,10 @@
+- if current_user
+  div class="star-#{recipe.id}"
+    - if recipe.voted_on_by? current_user
+      - star_flag = "starred"
+      - link_url = unstar_recipe_path(recipe)
+    - else
+      - star_flag = "unstarred"
+      - link_url = star_recipe_path(recipe)
+    = link_to link_url, method: :post, remote: :true do
+      span class="star glyphicon glyphicon-star #{star_flag}"
