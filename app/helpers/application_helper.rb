@@ -4,7 +4,7 @@ module ApplicationHelper
     { success: "alert-success", error: "alert-danger",
       alert: "alert-warning", notice: "alert-info" }[flash_type.to_sym] || flash_type.to_s
   end
-  
+
   def flash_messages(opts = {})
     flash.each do |flash_type, message|
       concat(
@@ -35,5 +35,10 @@ module ApplicationHelper
 
   def link_to_remove_field(name, f)
     f.hidden_field(:_destroy) + link_to(name, "#", class: "btn btn-default remove_field")
+  end
+
+  def get_name_from_email email
+    email =~ /(^.*)@.*$/
+    $1 ? $1 : email
   end
 end
