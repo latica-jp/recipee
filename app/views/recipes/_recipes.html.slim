@@ -8,20 +8,21 @@
                   / corner ribbon
                   .corner-ribbon.top-right.success
                     | みんなのレシピ
-                  / star / unstar
-                  .action
-                    - if recipe.voted_on_by? current_user
-                      - star_flag = "starred"
-                      - link_url = unstar_recipe_path(recipe)
-                    - else
-                      - star_flag = "unstarred"
-                      - link_url = star_recipe_path(recipe)
-                    = link_to link_url, method: :post do
-                      span class="glyphicon glyphicon-star #{star_flag}"
                 - else
                   / corner ribbon
                   .corner-ribbon.top-right.primary
                     | 公開中
+            / star / unstar
+            - if current_user
+              .action
+                - if recipe.voted_on_by? current_user
+                  - star_flag = "starred"
+                  - link_url = unstar_recipe_path(recipe)
+                - else
+                  - star_flag = "unstarred"
+                  - link_url = star_recipe_path(recipe)
+                = link_to link_url, method: :post do
+                  span class="glyphicon glyphicon-star #{star_flag}"
             / image
             - if recipe.image.present?
               - img = image_tag recipe.image_url(:thumb)
