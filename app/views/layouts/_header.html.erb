@@ -8,6 +8,7 @@
             </div>
             <ul class="nav navbar-nav navbar-right">
               <% if logged_in? %>
+                  <li><%= link_to "マイレシピ", recipes_path %></li>
                   <li><%= link_to "みんなのレシピ", recipes_path(recipe: { is_public: true }) %></li>
                   <li><%= link_to "お気に入りレシピ", starred_recipes_path(recipe: { is_public: true }) %></li>
                   <li><%= link_to "レシピの作成", new_recipe_path %></li>
