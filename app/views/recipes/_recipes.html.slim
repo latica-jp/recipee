@@ -3,7 +3,7 @@
       - @recipes.each do |recipe|
         .col-md-4.col-sd-6
           .thumbnail
-            - if @is_public
+            - if recipe.is_public && current_user.try(:id) != recipe.user_id
                 / corner ribbon
                 .ribbon
                   span みんなのレシピ

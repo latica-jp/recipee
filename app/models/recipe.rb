@@ -30,4 +30,8 @@ class Recipe < ActiveRecord::Base
   mount_uploader :image, ImageUploader
 
   validates :title, presence: true, length: {minimum: 2, maximum: 50}
+
+  def is_public_and_created_by_others
+    is_public && user_id != current_user
+  end
 end

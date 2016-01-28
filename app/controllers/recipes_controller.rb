@@ -30,6 +30,7 @@ class RecipesController < ApplicationController
       @recipes = @recipes.where.not(user_id: current_user.id) if current_user
     else
       @recipes = @q.result(distinct: true).where(user_id: current_user.id)
+      @recipes.concat current_user.find_voted_items
     end
     set_all_tags(@recipes)
     @recipes = @recipes.tagged_with(params[:tag]) if params[:tag]
