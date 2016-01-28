@@ -26,20 +26,28 @@ class RecipesController < ApplicationController
   def index
     @q = Recipe.ransack(params[:q])
     if @is_public || !current_user
+      # みんなのレシピ
       @recipes = @q.result(distinct: true).where(is_public: true)
       @recipes = @recipes.where.not(user_id: current_user.id) if current_user
     else
-      # 自分のレシピ＋お気に入り登録したレシピ（重複を排除）
-      @recipes = Set.new(@q.result(distinct: true).where(user_id: current_user.id))
-      @recipes.merge current_user.find_voted_items
+      # マイレシピ
+      @recipes = @q.result(distinct: true).where(user_id: current_user.id)
+      # 検索結果ではないばあい、お気に入り登録したレシピを追加（重複は排除）
+      unless params[:q].present?
+        @recipes = array_to_relations(
+          [@recipes,  current_user.find_voted_items], Recipe
+        )
+      end
     end
     set_all_tags(@recipes)
+    @recipes = @recipes.page(params[:page])
     @recipes = @recipes.tagged_with(params[:tag]) if params[:tag]
   end
 
   def starred_index
-    @recipes = current_user.find_voted_items
+    @recipes = array_to_relations([current_user.find_voted_items], Recipe)
     set_all_tags(@recipes)
+    @recipes = @recipes.page(params[:page])
   end
 
   def new
@@ -133,6 +141,16 @@ class RecipesController < ApplicationController
 
   def is_self_owned_or_public
     redirect_to root_path unless @recipe.is_public || @recipe.user_id == current_user.id
+  end
+
+  # ActiveRecord::Relation と 配列 を結合して Relation として返す
+  # acts_as_votable のメソッドが配列を返してくるため、苦肉の策
+  def array_to_relations relations, klass
+    ids = Array.new
+    relations.each { |rel|
+      ids.concat rel.map{ |r| r.id }
+    }
+    klass.where(id: ids.uniq)
   end
 
   def recipe_params
