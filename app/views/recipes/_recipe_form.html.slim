@@ -42,7 +42,7 @@
     .form-group
       = f.label :is_public, "閲覧", class: "col-md-2 control-label"
       .col-md-10
-        = f.select :is_public, { "メンバーに公開": true, "自分専用": false }, {}, class: "selectpicker"
+        = f.select :is_public, { "みんなに公開": true, "自分専用": false }, {}, class: "selectpicker"
             
   .recipe-ingredients.sortable.items
     h2 材料
