@@ -11,6 +11,10 @@ body {
   padding-top: $navbar-height;
 }
 
+.page-header {
+  margin-top: 22px;
+}
+
 .cover {
   // should be "image-url" for production mode
   background-image: image-url("header-image.jpg");
