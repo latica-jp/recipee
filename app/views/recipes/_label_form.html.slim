@@ -1,10 +1,11 @@
 .row
-  .form-horizontal
-    .form-group
-      - if @tags.present?
-        label class="control-label col-md-2"
-          | ラベルで検索
-        .col-md-10.tags
-          = link_to "すべてのレシピ", recipes_path(recipe: { is_public: @is_public }), class: "tag label label-info"
-          - @tags.each do |tag|
-            = tag_with_link_to tag, @is_public
+  .col-md-12
+    .form-horizontal
+      .form-group
+        - if @tags.present?
+          label class="control-label col-md-2"
+            | ラベルで検索
+          .col-md-10.tags
+            = link_to "すべてのレシピ", recipes_path(recipe: { is_public: @is_public }), class: "tag label label-info"
+            - @tags.each do |tag|
+              = tag_with_link_to tag, @is_public
