@@ -19,6 +19,10 @@ body {
   margin-top: 15px;
 }
 
+.alert {
+  word-break:break-all;
+}
+
 .cover {
   // should be "image-url" for production mode
   background-image: image-url("header-image.jpg");
