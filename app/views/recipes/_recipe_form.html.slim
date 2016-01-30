@@ -56,7 +56,7 @@
       = render "recipe_step_form", f: rsf
     = link_to_add_field "ステップを追加", f, :recipe_steps
       
-  .row.mar-top-20
+  .row.mar-top-bottom-25
     .col-md-6
       = f.submit (f.object.new_record? ? "作成する" : "更新する"), class: "btn btn-lg btn-warning btn-block"
     .col-md-6
