@@ -13,8 +13,10 @@
             .row
               .col-md-12
                 .alert.alert-info
-                  p このレシピのオリジナルはこちらです
-                  p = link_to @recipe.ref_url, @recipe.ref_url, target: "_blank"
+                  p 
+                    | このレシピは
+                    = link_to "こちら", @recipe.ref_url, target: "_blank"
+                    | からコピーしたものです。一般公開はできません。
         .col-md-5
           .main-photo
             - if @recipe.image.present?

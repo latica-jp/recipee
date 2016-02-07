@@ -34,4 +34,8 @@ class Recipe < ActiveRecord::Base
   def is_public_and_created_by_others
     is_public && user_id != current_user
   end
+
+  def is_clipped?
+    ref_url.present?
+  end
 end
