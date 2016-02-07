@@ -187,3 +187,57 @@ input.ingredient-quantity-for {
 .search-query:focus + button {
     z-index: 3;
 }
+
+section.section {
+  padding: 60px 0;
+}
+section.section.section-default {
+  background-color: #f9f9f9;
+}
+section.section.section-inverse {
+  background-color: #fff5eb;
+}
+section.section .subtitle {
+  margin-bottom: 22px;
+  text-align: center;
+}
+section.section .subtitle h2 {
+  margin-top: 0;
+}
+
+
+.service-box {
+  text-align: center;
+}
+.service-box .service-circle {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  font-size: 70px;
+  line-height: 115px;
+  color: #fff;
+  border-radius: 100%;
+}
+.service-box .service-circle.scrap {
+  background-color: #4caf50;
+}
+.service-box .service-circle.edit {
+  background-color: #ff9800;
+}
+.service-box .service-circle.organize {
+  background-color: #2196f3;
+}
+.service-box .service-circle.japanese {
+  background-color: #f44336;
+}
+.service-box .service-circle.japanese span.icon-jp:before {
+  font-weight: bold;
+  content: "あ";
+}
+.service-box .service-description h4 {
+  text-align: center;
+}
+.service-box .service-description p {
+  padding-top: 20px;
+  text-align: justify;
+}
