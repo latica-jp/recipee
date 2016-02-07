@@ -23,17 +23,30 @@ section class="section section-default"
         .service-description
           h4 スクラップ
           p 
-            |レシピサービスのレシピをスクラップ感覚で保存できます。
+            |レシピサービスのレシピをスクラップ感覚で保存。取り込みはレシピのURLを入力するだけの簡単操作です。
 
       .col-md-4.service-box
         .service-circle.edit
           i class="glyphicon glyphicon-pencil"
         .service-description
           h4 アレンジ
-          p レシピは自由に編集することができます。
+          p レシピは自由に編集可能。材料や手順を、おうち流にアレンジできます。
       .col-md-4.service-box
         .service-circle.organize
           i class="glyphicon glyphicon-tags"
         .service-description
           h4 整理
-          p レシピはタグをつかって整理できます。
+          p レシピはタグをつかって整理。検索も簡単です。
+section class="section section-inverse"
+  .container
+    .row
+        .col-md-12.subtitle
+          h2 対応レシピサイト
+          .col-md-10.col-md-offset-1.subtitle
+            = link_to image_tag(asset_path("logo-cookpad.png")), "http://cookpad.com"
+            = link_to image_tag(asset_path("logo-rakuten.png")), "http://recipe.rakuten.co.jp"
+            = link_to image_tag(asset_path("logo-orangepage.png")), "http://orangepage.net"
+            p
+              | レシピサイトからスクラップしたレシピは、ユーザだけが参照できます。
+              br
+              | 利用は私的な範囲に限り、外部には公開できません。

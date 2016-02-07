@@ -22,6 +22,7 @@ $icon-font-path: "bootstrap/";
 @import "bootstrap-sprockets";
 @import "honoka";
 @import "custom";
+@import "font-awesome";
 
 .field_with_errors {
   @extend .has-error;

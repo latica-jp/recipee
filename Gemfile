@@ -8,6 +8,9 @@ gem 'sqlite3', group: :development
 gem 'sass-rails', '~> 5.0'
 # Added 2016.01.14
 gem 'honoka-rails'
+# Added 2016.02.07
+gem "font-awesome-rails"
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
