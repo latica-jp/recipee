@@ -233,18 +233,19 @@ module RecipesHelper
     uri.query_values = nil
     # check is recipe URL
     recipe_url = "#{uri.scheme}://#{uri.host}#{uri.request_uri}"
-    if (recipe_url =~ /^http:\/\/cookpad\.com\/recipe\/\d.*/).present?
+    if (recipe_url =~ /^#{uri.scheme}:\/\/cookpad\.com\/recipe\/\d.*/).present?
       type = :cookpad
-    elsif (recipe_url =~ /^http:\/\/www\.orangepage\.net\/recipes\/detail_\d.*/).present?
+    elsif (recipe_url =~ /^#{uri.scheme}:\/\/www\.orangepage\.net\/recipes\/detail_\d.*/).present?
       type = :orangepage
-    elsif (recipe_url =~ /^http:\/\/recipe\.rakuten\.co\.jp\/recipe\/\d.*/).present?
+    elsif (recipe_url =~ /^#{uri.scheme}:\/\/recipe\.rakuten\.co\.jp\/recipe\/\d.*/).present?
       type = :rakuten
     else
       return nil
     end
 
     # check if page really exists
-    Net::HTTP.start(uri.host, uri.port) do |http|
+    is_use_ssl = uri.scheme == "https"
+    Net::HTTP.start(uri.host, uri.port, use_ssl: is_use_ssl) do |http|
       return nil if http.head(uri.request_uri).code != "200"
     end
 

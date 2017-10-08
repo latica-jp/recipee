@@ -7,7 +7,8 @@
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
+
 
 # Thumbnails
 ._*
@@ -110,4 +111,7 @@ public/uploads
 
 # 必要な人もいるのでテンプレートには入っていない
 # see: https://github.com/rails/rails/pull/2817
-/public/assets
+# /public/assets
+
+# Rubymine
+.idea
