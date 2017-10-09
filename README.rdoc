@@ -1,28 +1,17 @@
-== recipee
+== disclaimer
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+このソースコードは、エンジニア latica-jp が Ruby on Rails の開発事例を個人的なポートフォリオとして掲載しているものです。
 
-Things you may want to cover:
+http://recipee.herokuapp.com
 
-* Ruby version
+* レシピサイト（Cookpad、オレンジページ、楽天レシピ）からレシピを取得、自分用にアレンジして保存することができるWebサービスです。
+* レシピの著作権保護のため、レシピサイトから取得して編集したレシピの一般公開はできません。ユーザ登録したユーザ本人のみ閲覧可能です。
+* 自分で作成／編集したレシピは一般公開が可能です。
 
-* System dependencies
+* Rails 4.2.4
+* slim-rails
+* coffee-rails
+* sorcery
+* nokogiri
+* etc...
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
