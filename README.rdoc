@@ -8,6 +8,8 @@ http://recipee.herokuapp.com
 * レシピの著作権保護のため、レシピサイトから取得して編集したレシピの一般公開はできません。ユーザ登録したユーザ本人のみ閲覧可能です。
 * 自分で作成／編集したレシピは一般公開が可能です。
 
+== development
+
 * Rails 4.2.4
 * slim-rails
 * coffee-rails
